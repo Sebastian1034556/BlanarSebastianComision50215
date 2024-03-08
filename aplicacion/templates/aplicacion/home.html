@@ -6,6 +6,27 @@
     <title>Tienda</title>
 </head>
 <body>
-    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre de Curso</th>
+                <th>Comision</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for c in clientes %}
+            <tr>
+                <td>{{ c.apellido }}</td>
+                <td>{{ c.nombre }}</td>
+                <td>{{ c.edad }}</td>
+                <td>{{ c.dni }}</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+
+    </table>
 </body>
 </html>
