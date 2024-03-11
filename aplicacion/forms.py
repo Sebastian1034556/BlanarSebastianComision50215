@@ -12,3 +12,8 @@ class EmpleadoForm(forms.Form):
     apellido = forms.CharField(max_length=50,required=True)
     edad = forms.IntegerField(required=True)
     sueldo = forms.FloatField(required=True)
+    
+
+# class LoginForm(forms.Form):
+#     usuario = forms.CharField(max_length=50,required=True)
+#     contraseña = forms.CharField(max_length=50,required=True)

@@ -29,3 +29,10 @@ class Empleado(models.Model):
     sueldo = models.FloatField()
     def __str__(self):
         return f"{self.nombre},{self.apellido}"
+    
+# class Login(models.Model):
+#     usuario = models.CharField(max_length=50)
+#     contraseña = models.CharField(max_length=50)
+    
+#     def __str__(self):
+#         return f"{self.usuario},{self.contraseña}"

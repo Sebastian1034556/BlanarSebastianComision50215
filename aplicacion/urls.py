@@ -8,8 +8,12 @@ urlpatterns = [
     path('clientes/', clientes,name="clientes"),
     path('empleados/', empleados,name="empleados"),
     #---------------------------------------------------Formularios
+    # path('clienteForm/', clienteForm, name="cliente_form"),
     path('clienteForm/', clienteForm, name="cliente_form"),
     path('empleadoForm/', empleadoForm, name="empleado_form"),
+    
+    #LOGIN
+    # path('login/', login,name="login"),
     #----------------------------------------------------Busqueda
     path('buscar_clientes/', buscarClientes, name="buscar_clientes"),
     path('encontrar_clientes/', encontrarClientes, name="encontrar_clientes"),

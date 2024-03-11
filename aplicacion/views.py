@@ -6,11 +6,22 @@ def home(request):
     return render(request,"aplicacion/index.html")
 
 def clientes(request):
-    contexto = {'clientes': Cliente.objects.all()}
+    formulario_cliente = ClienteForm()
+    contexto = {
+        'clientes': Cliente.objects.all(),
+        'form': formulario_cliente
+    }
+    # contexto_formulario = {'form': formulario_cliente}
+    # contexto= {'clientes': Cliente.objects.all()}
     return render(request,"aplicacion/clientes.html",contexto)
 
 def empleados(request):
     return render(request,"aplicacion/empleados.html")
+
+# def login(request):
+#     formulario_cliente = LoginForm()
+#     contexto = {'form': formulario_cliente}
+#     return render(request,"aplicacion/login.html",contexto)
 
 def store(request):
     return render(request,"aplicacion/store.html")
@@ -37,7 +48,7 @@ def clienteForm(request):
             return render(request,"aplicacion/clientes.html",contexto)
     else:
         miForm = ClienteForm()
-        return render(request,"aplicacion/clienteForm.html",{"form": miForm}) 
+        return render(request,"aplicacion/clientes.html",{"form": miForm}) 
     
 def empleadoForm(request):
     if request.method == "POST":
@@ -56,6 +67,22 @@ def empleadoForm(request):
     else:
         miForm = EmpleadoForm()
         return render(request,"aplicacion/empleadoForm.html",{"form": miForm}) 
+    
+# def loginForm(request):
+#     if request.method == "POST":
+#         #Si es la 2da vez o más
+#         miForm = LoginForm(request.POST)
+#         if miForm.is_valid():
+#             login_usuario = miForm.cleaned_data.get("usuario")
+#             login_contraseña = miForm.cleaned_data.get("contraseña")
+#             login = Login(usuario = login_usuario, contraseña = login_contraseña)
+#             login.save()
+#             contexto = {'login': Login.objects.all()}
+#             return render(request,"aplicacion/login.html",contexto)
+#     else:
+#         miForm = loginForm()
+#         return render(request,"aplicacion/login.html",{"form": miForm}) 
+    
     
 def buscarClientes(request):
     return render(request,"aplicacion/buscar.html")

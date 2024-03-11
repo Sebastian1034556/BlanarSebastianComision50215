@@ -6,13 +6,32 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>CLIENTES</h1>
-    <form action="" method="post">
-        {% csrf_token %}
-        <table>
-            {{form.as_table}}
-        </table>
-        <input type="submit" value="Guardar">
-    </form>
+    <div class="button_container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Apellido</th>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Dni</th>
+                </tr>
+            </thead>
+        
+            <tbody>
+    
+            {% for c in clientes %}
+                <tr>
+                    <td>{{ c.id }}</td>
+                    <td>{{ c.apellido }}</td>
+                    <td>{{ c.nombre }}</td>
+                    <td>{{ c.edad }}</td>
+                    <td>{{ c.dni }}</td>
+                </tr>
+            {% endfor %}
+        
+            </tbody>
+        
+        </table> 
 </body>
 </html>
