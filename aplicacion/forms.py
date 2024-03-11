@@ -5,3 +5,10 @@ class ClienteForm(forms.Form):
     dni = forms.IntegerField(required=True)
     apellido = forms.CharField(max_length=50,required=True)
     edad = forms.IntegerField(required=True)
+
+class EmpleadoForm(forms.Form):
+    nombre = forms.CharField(max_length=50,required=True)
+    dni = forms.IntegerField(required=True)
+    apellido = forms.CharField(max_length=50,required=True)
+    edad = forms.IntegerField(required=True)
+    sueldo = forms.FloatField(required=True)

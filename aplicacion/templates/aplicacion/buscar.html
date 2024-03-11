@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar</title>
+</head>
+<body>
+    <form action="{% url 'encontrar_clientes' %}" method="get">
+        {% csrf_token %}
+        <p>Ingrese una cadena a buscar : <input type="text" name= "buscar" id= "buscar"></p>
+        <input type="submit" value="buscar">
+    </form>
+</body>
+</html>

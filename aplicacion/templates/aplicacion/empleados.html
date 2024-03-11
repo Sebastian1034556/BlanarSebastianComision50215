@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table style="background-color: aliceblue;" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Apellido</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Dni</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+        {% for e in empleados %}
+            <tr>
+                <td>{{ e.id }}</td>
+                <td>{{ e.apellido }}</td>
+                <td>{{ e.nombre }}</td>
+                <td>{{ e.edad }}</td>
+                <td>{{ e.dni }}</td>
+                <td>{{ e.sueldo}}</td>
+            </tr>
+        {% endfor %}
+    
+        </tbody>
+    
+    </table>
+</body>
+</html>
