@@ -137,9 +137,54 @@ footer p {
     font-weight: bold;
     color: white;
 }
-/* FORM */
+
+/* FORMULARIOS Y TABLAS */
+
+.table {
+    background-color: #000271;
+    color: #ffffff;
+    border-spacing: 30px; /* Espacio entre celdas */
+}
+thead{
+    background-color: #000271;
+    color: #ffffff;
+}
+td {
+    padding: 8px; /* Añadir espacio interno en las celdas */
+}
+
+input {
+    background-color: #000271;
+}
+.h2_container {
+    margin-left: 5%;
+    width: fit-content;
+    background-color: #000271;
+    border: 5px 5px #000271;
+    border-radius: 10px;
+}
+.h2_container h2{
+    color: #ffffff;
+}
+
+.texto_buscar {
+    margin-top: 30px;
+    font-size: 1.5em;
+}
+
 
 /* MEDIA QUERIES */
+@media (max-width: 768px) {
+    /* Estilos para pantallas más pequeñas */
+    th,td {
+        font-size: 10px;
+        padding: 4px;
+    }
+    .table {
+        border-spacing: 10px ;
+    }
+}
+
 @media (min-width: 720px) {
     header {
         background: #ffffff;
@@ -186,32 +231,4 @@ footer p {
         transition: 1s;
         transform: scale(1.3);
     }
-}
-
-/* FORMULARIOS Y TABLAS */
-.table {
-    background-color: #000271;
-    color: #ffffff;
-    border-spacing: 30px; /* Espacio entre celdas */
-}
-thead{
-    background-color: #000271;
-    color: #ffffff;
-}
-td {
-    padding: 8px; /* Añadir espacio interno en las celdas */
-}
-
-input {
-    background-color: #000271;
-}
-.h2_container {
-    margin-left: 5%;
-    width: fit-content;
-    background-color: #000271;
-    border: 5px 5px #000271;
-    border-radius: 10px;
-}
-.h2_container h2{
-    color: #ffffff;
 }

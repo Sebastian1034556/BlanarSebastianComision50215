@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import Q
 from .models import *
 from .forms import *
 # Create your views here.
@@ -111,12 +112,71 @@ def productoForm(request):
 def buscarClientes(request):
     return render(request,"aplicacion/buscar.html")
 
-def encontrarClientes(request):
-    if request.GET["buscar"]:
-        patron = request.GET["buscar"]
-        clientes = Cliente.objects.filter(nombre__icontains=patron)
-        contexto = { "clientes" : clientes }
-        return render(request,"aplicacion/clientes.html",contexto)
+# def encontrarClientes(request):
+#     if request.GET["buscar"]:
+#         patron = request.GET["buscar"]
+#         clientes = Cliente.objects.filter(nombre__icontains=patron)
+#         contexto = { "clientes" : clientes }
+#         return render(request,"aplicacion/clientes.html",contexto)
     
-    contexto = {'clientes': Cliente.objects.all()}
-    return render(request,"aplicacion/clientes.html",contexto)
+#     contexto = {'clientes': Cliente.objects.all()}
+#     return render(request,"aplicacion/clientes.html",contexto)
+
+def encontrarClientes(request):
+    patron = request.GET.get("buscar")
+    if patron:
+        clientes = Cliente.objects.filter(            
+            Q(nombre__icontains=patron) |
+            Q(apellido__icontains=patron) |
+            Q(id__icontains=patron) |
+            Q(edad__icontains=patron)|
+            Q(dni__icontains=patron)
+)
+    else:
+        clientes = Cliente.objects.all()
+    
+    contexto = {"clientes": clientes}
+    return render(request, "aplicacion/clientes.html", contexto)
+
+
+def buscarEmpleados(request):
+    return render(request,"aplicacion/buscar.html")
+
+def encontrarEmpleados(request):
+    patron = request.GET.get("buscar")
+    if patron:
+        empleados = Empleado.objects.filter(            
+            Q(nombre__icontains=patron) |
+            Q(apellido__icontains=patron) |
+            Q(id__icontains=patron) |
+            Q(edad__icontains=patron) |
+            Q(sueldo__icontains=patron) |
+            Q(dni__icontains=patron)
+)
+    else:
+        empleados = Empleado.objects.all()
+    
+    contexto = {"empleados": empleados}
+    return render(request, "aplicacion/empleados.html", contexto)
+
+
+
+def buscarProductos(request):
+    return render(request,"aplicacion/buscar.html")
+
+def encontrarProductos(request):
+    patron = request.GET.get("buscar")
+    if patron:
+        productos = Producto.objects.filter(            
+            Q(nombre__icontains=patron) |
+            Q(precio__icontains=patron) |
+            Q(marca__icontains=patron) |
+            Q(stock__icontains=patron) |
+            Q(color__icontains=patron) |
+            Q(talla__icontains=patron)
+)
+    else:
+        productos = Producto.objects.all()
+    
+    contexto = {"productos": productos}
+    return render(request, "aplicacion/productos.html", contexto)

@@ -56,3 +56,10 @@
         });
     </script>
 {% endblock formulario %}
+{% block busqueda %}
+<form action="{% url 'encontrar_productos' %}" method="get">
+    {% csrf_token %}
+    <p class="texto_buscar">Ingrese un dato a buscar : <input type="text" name= "buscar" id= "buscar"></p>
+    <input type="submit" value="buscar">
+</form>
+{% endblock busqueda %}
