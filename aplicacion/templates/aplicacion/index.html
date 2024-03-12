@@ -27,8 +27,8 @@
                 <nav>
                     <a href="{% url 'home' %}">INICIO</a>
                     <a href="{% url 'clientes' %}" class="login">CLIENTES</a>
-                    <a href="{% url 'about' %}" class="login">SOBRE NOSOTROS</a>
-                    <a href="#" class="login">PRODUCTOS</a>
+                    <a href="{% url 'empleados' %}" class="login">EMPLEADOS</a>
+                    <a href="{% url 'productos' %}" class="login">PRODUCTOS</a>
                 </nav>
             </div>
             
@@ -85,8 +85,14 @@
 {% endblock contenido %}
 {% block tabla_clientes %}
 {% endblock tabla_clientes%}
+{% block tabla_empleados %}
+{% endblock tabla_empleados%}
+{% block tabla_productos %}
+{% endblock tabla_productos%}
 {% block formulario %}
 {% endblock formulario%}
+{% block busqueda %}
+{% endblock busqueda %}
         <footer>
             <p>&copy; FOOT<span class="orange-text">GEAR</span> 2014</p>
         </footer>

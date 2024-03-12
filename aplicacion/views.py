@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 # Create your views here.
@@ -11,12 +11,15 @@ def clientes(request):
         'clientes': Cliente.objects.all(),
         'form': formulario_cliente
     }
-    # contexto_formulario = {'form': formulario_cliente}
-    # contexto= {'clientes': Cliente.objects.all()}
     return render(request,"aplicacion/clientes.html",contexto)
 
 def empleados(request):
-    return render(request,"aplicacion/empleados.html")
+    formulario_empleado = EmpleadoForm()
+    contexto = {
+        'empleados': Empleado.objects.all(),
+        'form': formulario_empleado
+    }
+    return render(request,"aplicacion/empleados.html",contexto)
 
 # def login(request):
 #     formulario_cliente = LoginForm()
@@ -30,7 +33,12 @@ def about(request):
     return render(request,"aplicacion/about.html")
 
 def productos(request):
-    return render(request,"aplicacion/products.html")
+    formulario_producto = ProductoForm()
+    contexto = {
+        'productos': Producto.objects.all(),
+        'form': formulario_producto
+    }
+    return render(request,"aplicacion/productos.html",contexto)
 
 #-----------------------------------------------Form
 def clienteForm(request):
@@ -44,8 +52,7 @@ def clienteForm(request):
             cliente_dni = miForm.cleaned_data.get("dni")
             cliente = Cliente(nombre = cliente_nombre, apellido = cliente_apellido, edad = cliente_edad,dni = cliente_dni)
             cliente.save()
-            contexto = {'clientes': Cliente.objects.all()}
-            return render(request,"aplicacion/clientes.html",contexto)
+            return redirect('clientes')
     else:
         miForm = ClienteForm()
         return render(request,"aplicacion/clientes.html",{"form": miForm}) 
@@ -62,11 +69,28 @@ def empleadoForm(request):
             empleado_sueldo = miForm.cleaned_data.get("sueldo")
             empleado = Empleado(nombre = empleado_nombre, apellido = empleado_apellido, edad = empleado_edad,dni = empleado_dni, sueldo = empleado_sueldo)
             empleado.save()
-            contexto = {'empleados': Empleado.objects.all()}
-            return render(request,"aplicacion/empleados.html",contexto)
+            return redirect('empleados')
     else:
         miForm = EmpleadoForm()
-        return render(request,"aplicacion/empleadoForm.html",{"form": miForm}) 
+        return render(request,"aplicacion/empleados.html",{"form": miForm}) 
+
+def productoForm(request):
+    if request.method == "POST":
+        #Si es la 2da vez o más
+        miForm = ProductoForm(request.POST)
+        if miForm.is_valid():
+            producto_nombre = miForm.cleaned_data.get("nombre")
+            producto_precio = miForm.cleaned_data.get("precio")
+            producto_marca =  miForm.cleaned_data.get("marca")
+            producto_stock =  miForm.cleaned_data.get("stock")
+            producto_color = miForm.cleaned_data.get("color")
+            producto_talla = miForm.cleaned_data.get("talla")
+            producto = Producto(nombre = producto_nombre, precio = producto_precio, stock = producto_stock,marca = producto_marca,color = producto_color, talla = producto_talla)
+            producto.save()
+            return redirect('productos')
+    else:
+        miForm = ProductoForm()
+        return render(request,"aplicacion/productos.html",{"form": miForm}) 
     
 # def loginForm(request):
 #     if request.method == "POST":

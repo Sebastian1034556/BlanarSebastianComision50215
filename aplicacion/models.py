@@ -12,11 +12,12 @@ class Cliente(models.Model):
 
 class Producto(models.Model):
     nombre = models.CharField(max_length=50)
-    descripcion = models.CharField(max_length=50)
-    precio = models.FloatField()
-    categoria = models.CharField(max_length=50) 
+    precio  = models.FloatField(max_length=50)
     marca = models.CharField(max_length=50)
     stock = models.IntegerField()
+    color = models.CharField(max_length=50) 
+    talla = models.CharField(max_length=50) 
+    
     
     def __str__(self):
         return f"{self.nombre}"

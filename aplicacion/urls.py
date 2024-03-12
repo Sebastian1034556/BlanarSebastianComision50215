@@ -4,13 +4,13 @@ urlpatterns = [
     path('', home,name="home"),
     path('about/', about,name="about"),
     path('store/', store,name="store"),
-    path('products/', productos,name="products"),
+    path('productos/', productos,name="productos"),
     path('clientes/', clientes,name="clientes"),
     path('empleados/', empleados,name="empleados"),
     #---------------------------------------------------Formularios
-    # path('clienteForm/', clienteForm, name="cliente_form"),
     path('clienteForm/', clienteForm, name="cliente_form"),
     path('empleadoForm/', empleadoForm, name="empleado_form"),
+    path('productoForm/', productoForm, name="producto_form"),
     
     #LOGIN
     # path('login/', login,name="login"),

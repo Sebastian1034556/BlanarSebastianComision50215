@@ -2,28 +2,30 @@
 {% block contenido%}
 {% endblock contenido%}
 
-{% block tabla_clientes %}
+{% block tabla_productos %}
 <div class="button_container">
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Apellido</th>
                 <th>Nombre</th>
-                <th>Edad</th>
-                <th>Dni</th>
+                <th>Precio</th>
+                <th>Marca</th>
+                <th>Stock</th>
+                <th>Color</th>
+                <th>Talla</th>
             </tr>
         </thead>
     
         <tbody>
 
-        {% for c in clientes %}
+        {% for p in productos %}
             <tr>
-                <td>{{ c.id }}</td>
-                <td>{{ c.apellido }}</td>
-                <td>{{ c.nombre }}</td>
-                <td>{{ c.edad }}</td>
-                <td>{{ c.dni }}</td>
+                <td>{{ p.nombre }}</td>
+                <td>{{ p.precio }}</td>
+                <td>{{ p.marca }}</td>
+                <td>{{ p.stock }}</td>
+                <td>{{ p.color }}</td>
+                <td>{{ p.talla }}</td>
             </tr>
         {% endfor %}
     
@@ -31,16 +33,16 @@
     
     </table> 
 </div>
-{% endblock tabla_clientes%}
+{% endblock tabla_productos%}
 {% block formulario %}
 <div class="button_container">
-    <button  id="mostrarFormulario">Agregar Cliente</button>
+    <button  id="mostrarFormulario">Agregar Producto</button>
 </div>
     <div id="formulario" style="display: none;">
         <div class="h2_container">
-            <h2>AGREGAR CLIENTE</h2>
+            <h2>AGREGAR PRODUCTO</h2>
         </div>
-        <form action="{% url 'cliente_form' %}" method="post">
+        <form action="{% url 'producto_form' %}" method="post">
             {% csrf_token %}
             <table>
                 {{form.as_table}}
@@ -54,10 +56,3 @@
         });
     </script>
 {% endblock formulario %}
-{% block busqueda %}
-<form action="{% url 'encontrar_clientes' %}" method="get">
-    {% csrf_token %}
-    <p>Ingrese una cadena a buscar : <input type="text" name= "buscar" id= "buscar"></p>
-    <input type="submit" value="buscar">
-</form>
-{% endblock busqueda %}

@@ -189,9 +189,14 @@ footer p {
 }
 
 /* FORMULARIOS Y TABLAS */
-table {
-    background-color: aliceblue;
+.table {
+    background-color: #000271;
+    color: #ffffff;
     border-spacing: 30px; /* Espacio entre celdas */
+}
+thead{
+    background-color: #000271;
+    color: #ffffff;
 }
 td {
     padding: 8px; /* Añadir espacio interno en las celdas */
