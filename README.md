@@ -7,7 +7,7 @@
 esta entrega, también varias funciones en views que no eliminé porque tal vez me sirvan para seguir trabajandolo más adelante)
 
 
-3. Los formularios se encuentran usando los enlaces de la barra nav. Permiten agregar datos y están además las tablas con sus respectivos datos. Lo quise hacer todo en las misma urls aunque en clase
+3. Los formularios se encuentran usando los enlaces de la barra nav. Permiten agregar datos y están además las tablas con sus respectivos datos. Lo quise hacer todo en las mismas urls aunque en clase
 lo haciamos con otras urls como "clienteForm". Se me hacía un poco molesto andar cambiando de url para ver cada cosa así que preferí poner todo en las paginas de clientes, empleados y productos.
 
 
