@@ -6,42 +6,15 @@ from .forms import *
 def home(request):
     return render(request,"aplicacion/index.html")
 
-def clientes(request):
-    formulario_cliente = ClienteForm()
-    contexto = {
-        'clientes': Cliente.objects.all(),
-        'form': formulario_cliente
-    }
-    return render(request,"aplicacion/clientes.html",contexto)
-
-def empleados(request):
-    formulario_empleado = EmpleadoForm()
-    contexto = {
-        'empleados': Empleado.objects.all(),
-        'form': formulario_empleado
-    }
-    return render(request,"aplicacion/empleados.html",contexto)
-
-# def login(request):
-#     formulario_cliente = LoginForm()
-#     contexto = {'form': formulario_cliente}
-#     return render(request,"aplicacion/login.html",contexto)
-
 def store(request):
     return render(request,"aplicacion/store.html")
 
 def about(request):
     return render(request,"aplicacion/about.html")
 
-def productos(request):
-    formulario_producto = ProductoForm()
-    contexto = {
-        'productos': Producto.objects.all(),
-        'form': formulario_producto
-    }
-    return render(request,"aplicacion/productos.html",contexto)
+#-----------------------------------------------CLIENTES------------------------------------------------------------------------
 
-#-----------------------------------------------Form
+#------------------------------------------------CREATE------------------------------------------------------------------------
 def clienteForm(request):
     if request.method == "POST":
         #Si es la 2da vez o más
@@ -57,7 +30,18 @@ def clienteForm(request):
     else:
         miForm = ClienteForm()
         return render(request,"aplicacion/clientes.html",{"form": miForm}) 
-    
+
+#-------------------------------------------------READ----------------------------------------------------------------------------------------
+def clientes(request):
+    formulario_cliente = ClienteForm()
+    contexto = {
+        'clientes': Cliente.objects.all(),
+        'form': formulario_cliente
+    }
+    return render(request,"aplicacion/clientes.html",contexto)
+#------------------------------------------------EMPLEADOS------------------------------------------------------------------------
+
+#------------------------------------------------CREATE------------------------------------------------------------------------
 def empleadoForm(request):
     if request.method == "POST":
         #Si es la 2da vez o más
@@ -75,6 +59,21 @@ def empleadoForm(request):
         miForm = EmpleadoForm()
         return render(request,"aplicacion/empleados.html",{"form": miForm}) 
 
+
+
+
+#--------------------------------------------------READ-------------------------------------------------------------------------------
+def empleados(request):
+    formulario_empleado = EmpleadoForm()
+    contexto = {
+        'empleados': Empleado.objects.all(),
+        'form': formulario_empleado
+    }
+    return render(request,"aplicacion/empleados.html",contexto)
+
+#-----------------------------------------------PRODUCTOS------------------------------------------------------------------------
+
+#------------------------------------------------CREATE------------------------------------------------------------------------
 def productoForm(request):
     if request.method == "POST":
         #Si es la 2da vez o más
@@ -91,36 +90,23 @@ def productoForm(request):
             return redirect('productos')
     else:
         miForm = ProductoForm()
-        return render(request,"aplicacion/productos.html",{"form": miForm}) 
-    
-# def loginForm(request):
-#     if request.method == "POST":
-#         #Si es la 2da vez o más
-#         miForm = LoginForm(request.POST)
-#         if miForm.is_valid():
-#             login_usuario = miForm.cleaned_data.get("usuario")
-#             login_contraseña = miForm.cleaned_data.get("contraseña")
-#             login = Login(usuario = login_usuario, contraseña = login_contraseña)
-#             login.save()
-#             contexto = {'login': Login.objects.all()}
-#             return render(request,"aplicacion/login.html",contexto)
-#     else:
-#         miForm = loginForm()
-#         return render(request,"aplicacion/login.html",{"form": miForm}) 
-    
-    
+        return render(request,"aplicacion/productos.html",{"form": miForm})
+
+#--------------------------------------------------READ-----------------------------------------------------------------------------------
+def productos(request):
+    formulario_producto = ProductoForm()
+    contexto = {
+        'productos': Producto.objects.all(),
+        'form': formulario_producto
+    }
+    return render(request,"aplicacion/productos.html",contexto)
+
+#------------------------------------------------------------------------------------------------------------------------------------------
+
+#-------------------------------------------------------BUSCAR-----------------------------------------------------------------------------
 def buscarClientes(request):
     return render(request,"aplicacion/buscar.html")
 
-# def encontrarClientes(request):
-#     if request.GET["buscar"]:
-#         patron = request.GET["buscar"]
-#         clientes = Cliente.objects.filter(nombre__icontains=patron)
-#         contexto = { "clientes" : clientes }
-#         return render(request,"aplicacion/clientes.html",contexto)
-    
-#     contexto = {'clientes': Cliente.objects.all()}
-#     return render(request,"aplicacion/clientes.html",contexto)
 
 def encontrarClientes(request):
     patron = request.GET.get("buscar")
