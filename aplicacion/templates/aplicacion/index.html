@@ -11,13 +11,16 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
-        {% comment %} <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'css/styles.css' %}" rel="stylesheet"/> {% endcomment %}
+        
         <link href="{% static 'css/estilos_propios.css' %}" rel="stylesheet"/>
+        
+        <!-- Font Awesome-->
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </head>
     <body>
         <header>
-            <div class="container">
+            <div class="container header_container">
                 <h1 class="headline">
                     <span class="white-text">FOOT</span>
                     <span class="orange-text">GEAR</span>
@@ -26,9 +29,31 @@
             <div class="container navigation">
                 <nav>
                     <a href="{% url 'home' %}">INICIO</a>
-                    <a href="{% url 'clientes' %}" class="login">CLIENTES</a>
-                    <a href="{% url 'empleados' %}" class="login">EMPLEADOS</a>
-                    <a href="{% url 'productos' %}" class="login">PRODUCTOS</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'clientes' %}">CLIENTES</a>
+                        <a href="{% url 'empleados' %}">EMPLEADOS</a>
+                        <a href="{% url 'productos' %}">PRODUCTOS</a>
+                        
+
+                        <div class="text-center">
+                            <p  class="nombre_usuario">[{{user.username}}]</p>
+                            <a href="{% url 'agregar_avatar' %}"><img src="{{request.session.avatar}}" height="40px" weight=""40px></a>
+                        </div>
+                        
+                            <form action="{% url 'perfil' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success logout editar">PERFIL</button>
+                            </form>
+
+                        <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success logout">LOGOUT</button>
+                            </form>
+
+                    {% else %}
+                        <a class= "btn btn-primary" href="{% url 'login' %}">LOGIN</a>
+                        <a class= "btn btn-success" href="{% url 'registrar' %}">REGISTRARSE</a>
+                    {% endif %}
                 </nav>
             </div>
             
@@ -36,22 +61,23 @@
 {% block contenido%}
         <main>
             <section class="hero">
-                <div class="container">
                     <div class="img-container" id="hero">
                         <!-- IMAGEN BANNER -->
                     </div>
                     <form action="https:/instagram.com">
                         <div class="button_container">
-                            <button>COMPRA YA!</button>
+                            <button id="buy_button">COMPRA YA!</button>
                         </div>
                     </form>
-                </div>
             </section>
             
 
             <section class="marcas">
                 <div class="container">
-                    <div class="img-container" id="nike"></div>
+                    <div class="img-container  zapatillas" id="nike">
+                        <div class="img-zapatillas" ></div>
+                    </div>
+
 
                     <form action="https:/instagram.com">
                         <div class="button_container">
@@ -59,7 +85,9 @@
                         </div>
                     </form>
                         
-                    <div class="img-container" id="adidas"></div>
+                    <div class="img-container zapatillas" id="adidas">
+                        <div class="img-zapatillas" id="adidas_img"></div>
+                    </div>
 
                     <form action="https:/instagram.com">
                         <div class="button_container">
@@ -67,7 +95,9 @@
                         </div>
                     </form>
                     
-                    <div class="img-container" id="puma"></div>
+                    <div class="img-container zapatillas" id="puma">
+                        <div class="img-zapatillas" id="puma_img"></div>
+                    </div>
 
                     <form action="https:/instagram.com">
                         <div class="button_container">

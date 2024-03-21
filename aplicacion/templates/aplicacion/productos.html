@@ -7,12 +7,14 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Nombre</th>
                 <th>Precio</th>
                 <th>Marca</th>
                 <th>Stock</th>
                 <th>Color</th>
                 <th>Talla</th>
+                <th>Acciones</th>
             </tr>
         </thead>
     
@@ -20,12 +22,27 @@
 
         {% for p in productos %}
             <tr>
+                <td>{{ p.id }}</td>
                 <td>{{ p.nombre }}</td>
                 <td>{{ p.precio }}</td>
                 <td>{{ p.marca }}</td>
                 <td>{{ p.stock }}</td>
                 <td>{{ p.color }}</td>
                 <td>{{ p.talla }}</td>
+                <td>
+                    <a
+                    href="{% url 'producto_update' p.id %}"
+                    class="btn btn-primary"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                    ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                    </a>
+                    <a
+                    href="{% url 'producto_delete' p.id %}"
+                    class="btn btn-danger"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                    ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
     
@@ -39,15 +56,14 @@
     <button  id="mostrarFormulario">Agregar Producto</button>
 </div>
     <div id="formulario" style="display: none;">
-        <div class="h2_container">
-            <h2>AGREGAR PRODUCTO</h2>
-        </div>
-        <form action="{% url 'producto_form' %}" method="post">
+        <form  action="{% url 'producto_create' %}" method="post">
             {% csrf_token %}
-            <table>
+            <table class="tabla_formularios">
                 {{form.as_table}}
             </table>
-            <input type="submit" value="Guardar">
+            <div class="form">
+                <input class="guardar" type="submit" value="Guardar">
+            </div>
         </form>
     </div>
     <script>
@@ -59,7 +75,11 @@
 {% block busqueda %}
 <form action="{% url 'encontrar_productos' %}" method="get">
     {% csrf_token %}
-    <p class="texto_buscar">Ingrese un dato a buscar : <input type="text" name= "buscar" id= "buscar"></p>
-    <input type="submit" value="buscar">
+    <div class="tabla_formularios">
+        <p class="texto_buscar">Ingrese un dato a buscar : <input type="text" name= "buscar" id= "buscar"></p>
+    </div>
+    <div class="form">
+        <input type="submit" value="buscar">
+    </div>
 </form>
 {% endblock busqueda %}

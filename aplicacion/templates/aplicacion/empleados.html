@@ -13,6 +13,7 @@
                 <th>Edad</th>
                 <th>Dni</th>
                 <th>Sueldo</th>
+                <th>Acciones</th>
             </tr>
         </thead>
     
@@ -25,6 +26,20 @@
                 <td>{{ e.edad }}</td>
                 <td>{{ e.dni }}</td>
                 <td>{{ e.sueldo}}</td>
+                <td>
+                    <a
+                    href="{% url 'empleado_update' e.id %}"
+                    class="btn btn-primary"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                    ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                    </a>
+                    <a
+                    href="{% url 'empleado_delete' e.id %}"
+                    class="btn btn-danger"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                    ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
     
@@ -39,15 +54,14 @@
     <button  id="mostrarFormulario_empleados">Agregar empleado</button>
 </div>
 <div id="formulario_empleados" style="display: none;">
-    <div class="h2_container">
-        <h2>AGREGAR EMPLEADO</h2>
-    </div>
-    <form action="{% url 'empleado_form' %}" method="post">
+    <form action="{% url 'empleado_create' %}" method="post">
         {% csrf_token %}
-        <table>
+        <table class="tabla_formularios">
             {{form.as_table}}
         </table>
-        <input type="submit" value="Guardar">
+        <div class="form">
+            <input class="guardar" type="submit" value="Guardar">
+        </div>
     </form>
 </div>
 <script>
@@ -59,7 +73,11 @@
 {% block busqueda %}
 <form action="{% url 'encontrar_empleados' %}" method="get">
     {% csrf_token %}
-    <p class="texto_buscar">Ingrese un dato a buscar : <input type="text" name= "buscar" id= "buscar"></p>
-    <input type="submit" value="buscar">
+    <div class="tabla_formularios">
+        <p class="texto_buscar">Ingrese un dato a buscar : <input type="text" name= "buscar" id= "buscar"></p>
+    </div>
+    <div class="form">
+        <input type="submit" value="buscar">
+    </div>
 </form>
 {% endblock busqueda %}

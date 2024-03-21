@@ -5,46 +5,56 @@
     box-sizing: border-box;
 }
 
-/*------------------------Generales--------------- */
+/*-----------------------------------------------------GENERALES-------------------------------------------------------------------------------------*/
 body {
-    font-family: 'inter';
+    font-family: sans-serif;
+    background-color: #000;
+    /* background: linear-gradient(#d4d4d4,#454545); */
 }
 
 html {
     scroll-behavior: smooth;
 }
-h1 {font-size: 3,5em;}
-h2{font-size: 2,7em;}
+
+h1 {font-size: 2.5em;}
+h2{font-size: 2.7em;}
 h3{font-size: 2em;}
-p{font-size: 1,25em;}
+p{font-size: 1.25em;}
 ul{list-style: none;}
 
-button , input{
-    font-size: 1,5em;
+button , input,#buy_button{
+    font-size: 1em;
     font-weight: bold;
     padding: 10px 30px;
     border-radius: 10px;
-    border: 1px solid black;
-    /* opcional box-shadow */
-    color: white;
-    background-color: black;
+    border: 1px solid #fff;
+    color: #000;
+    background-color: #fff;
 }
-button:hover{
-    color: black;
-    background-color: white;
+
+button:hover,#buy_button:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+}
+#buy_button {
+    color: #000;
 }
 
 .container{
     max-width: 700px;
     margin: auto;
 }
+/*Los elementos de acciones*/
+i,.btn {
+    color: #ff4000;
+}
 /*------------------------------HEADER-----------  */
 header{
     background-color: rgb(0, 0, 0);
+    flex-wrap: wrap;
 }
 
 header .container {
-    padding: 20px 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -66,30 +76,57 @@ header nav{
     flex-direction: column;
     text-align: center;
     padding-bottom: 2px;
-
 }
 
 header div nav a{
     padding: 5px 12px;
     text-decoration: none;
     color: white;
-    font-weight: bolder;
-    
+    font-weight: bolder;   
 }
 
 header .navigation{
-    background-color: rgb(9, 0, 115);
-}
-/*----------------------------MAIN-----------------------*/
-#hero {
-    margin-top: 30px;
-    height: 60vh;
-    color: white;
-    background-image: url("../assets/img/hero_section.jpg");
+    background-image:
+    linear-gradient(0deg,
+    rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../assets/img/75496e55be60c1cbf480d6e76bd11ec4.jpg);
+    filter: saturate(2);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: saturate(2);
+    
+}
+.logout {
+    margin-top: 25px;
+    background-color:rgb(219, 0, 0);
+    color: rgb(255, 255, 255);
+    font-size: 0.5em;
+    font-weight: bold;
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.nombre_usuario {
+    color: #ffffff;
+    margin-right: 20px;
+}
+
+.editar {
+    margin-right: 20px;
+    background-color:rgb(0, 44, 219);
+    font-size: 0.5em;
+} 
+
+/*----------------------------MAIN-----------------------*/
+#hero {
+    height: 60vh;
+    color: white;
+    background-image: url("../assets/img/peakpx\ \(1\).jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: saturate(2.5);
+    box-shadow: 0 0 10px 0 #000;
 }
 
 .button_container {
@@ -111,19 +148,46 @@ header .navigation{
     background-size: cover;
     filter: saturate(2);
 }
+
 #nike {
-    background-color: rgba(0, 117, 255,0.6);
-    background-image: url("../assets/img/custom-nike-dunk-high-by-you-shoes-removebg.png");
+    background-image:
+    linear-gradient(0deg,
+    rgba(0, 0, 0, 0.2), rgba(0, 0, 0,0.4 )), 
+    url("../assets/img/peakpx\ \(4\).jpg");
+    box-shadow: 0 0 10px 0 #000;
 }
 #adidas{
-    background-color: rgba(0, 255, 41,0.6);
-    background-image: url("../assets/img/adidas-forum-low-white-collegiate-green-gy5835-1-removebg.png");
+    background-image:
+    linear-gradient(0deg,
+    rgba(0, 0, 0, 0.2), rgba(0, 0, 0,0.4 )), 
+    url("../assets/img/peakpx\ \(4\).jpg");
+    box-shadow: 0 0 10px 0 #000;
 }
 #puma{
-    background-color: rgba(255,0,0,0.6);
-    background-image: url("../assets/img/puma_ferrari-removebg.png");
+    background-image: 
+        linear-gradient(0deg,
+        rgba(0, 0, 0, 0.2), rgba(0, 0, 0,0.4 )),
+    url("../assets/img/peakpx\ \(4\).jpg");
+    box-shadow: 0 0 10px 0 #000;
 }
 
+.img-container .img-zapatillas {
+    background-image:
+    url(../assets/img/custom-nike-dunk-high-by-you-shoes-removebg.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+}
+
+#adidas_img {
+    background-image: url(../assets/img/adidas-forum-low-white-collegiate-green-gy5835-1-removebg.png);
+}
+#puma_img {
+    background-size: 90%;
+    background-image: url(../assets/img/puma-removebg.png);
+    margin-top: 13%;
+} 
 /*---------------------------------FOOTER------------------------------------  */
 footer{
     margin-top: 30px;
@@ -141,40 +205,133 @@ footer p {
 /* FORMULARIOS Y TABLAS */
 
 .table {
-    background-color: #000271;
-    color: #ffffff;
+    background-color: aliceblue;
+    color: #000000;
     border-spacing: 30px; /* Espacio entre celdas */
 }
 thead{
-    background-color: #000271;
-    color: #ffffff;
+    background-color: aliceblue;
+    color: #000000;
 }
 td {
     padding: 8px; /* Añadir espacio interno en las celdas */
 }
 
 input {
-    background-color: #000271;
-}
-.h2_container {
-    margin-left: 5%;
-    width: fit-content;
-    background-color: #000271;
-    border: 5px 5px #000271;
-    border-radius: 10px;
-}
-.h2_container h2{
-    color: #ffffff;
+    background-color: aliceblue;
+    color: #000000;
 }
 
 .texto_buscar {
     margin-top: 30px;
     font-size: 1.5em;
 }
-
+.form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.form input {
+    margin-top: 20px;
+}
+.tabla_formularios {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.tabla_formularios tbody {
+    margin-top: 30px;
+}
+.tabla_formularios label {
+    color: #000000;
+}
 
 /* MEDIA QUERIES */
-@media (max-width: 768px) {
+
+@media (min-width: 775px) {
+    body {
+        background: linear-gradient(to right,red,black,black,blue); 
+        
+        background-position: center center;
+        background-repeat: repeat;
+        background-size: cover;
+    } 
+    header .container {
+        max-width: none;
+        background: #000;
+        /* background: linear-gradient(to right,black,rgb(255, 4, 0)); */
+    }
+    header nav {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    header .navigation{
+        background-image: none;
+        background-color: transparent;
+        background: linear-gradient(to right,rgb(0, 0, 92),black);
+        /* background-color: #001F3F; */
+    }
+    #hero {
+        background-image: url(../assets/img/adetayo-adepoju-ZEJXkYyh--8-unsplash.jpg);
+        filter: saturate(3);
+        height: 90vh;
+    }
+    .marcas .img-container {
+        height: 60vh;
+    }
+    
+    button,#buy_button {
+        font-size: 2em;
+    }
+    footer p{
+        font-size: 3em;
+    }
+    header div nav a{
+        padding: 20px 12px;
+        margin-right: 20px;
+        font-size: 1.5em;
+    }
+    header div nav a:hover{
+        color: #000000;
+    }
+    header h1 {
+        font-size: 4em;
+    }
+    /* header h1:hover{
+        transition: 1s;
+        transform: scale(1.2);
+    } */
+    .texto_buscar {
+        margin-top: 60px;
+    }
+
+    @media (max-width: 1200px){
+        header .container nav a {
+            font-size: 1em;
+            padding: 30px 12px;
+        }
+    }
+    @media (max-width: 980px){
+        header .container nav a {
+            font-size: 0.8em;
+            padding: 30px 5px;
+        }
+        .editar {
+            font-size: 0.35em;
+        }
+        .logout {
+            font-size: 0.35em;
+        }
+        p {
+            font-size: 0.8em;
+        }
+    }
+    
+}
+
+@media (max-width: 775px) {
     /* Estilos para pantallas más pequeñas */
     th,td {
         font-size: 10px;
@@ -183,52 +340,30 @@ input {
     .table {
         border-spacing: 10px ;
     }
+    .logout {
+        margin-top: 0;
+        font-size: 0.8em;
+    }
+    .nombre_usuario {
+        margin-right: 0;
+    }
+    button , input{
+        margin-bottom: 10px;
+    }
+    .editar {
+        margin-right: 0px;
+    } 
+    .header_container {
+        max-width: 775px;
+    }
 }
-
-@media (min-width: 720px) {
-    header {
-        background: #ffffff;
-    }
-    header .container {
-        max-width: none;
-        background-color: #000000;
-    }
-    header nav{
-        flex-direction: row;
-        justify-content: space-around;
-    }
-    header .navigation{
-        background-color: rgb(9, 0, 115);
-    }
-    #hero {
-        height: 100vh;
-    }
-
-    #nike{height: 60vh;}
-
-    #adidas{height: 60vh;}
-
-    #puma{height: 60vh;}
-    
-    button {
+@media (max-width: 340px) {
+    h1 {
         font-size: 2em;
     }
-    footer p{
-        font-size: 3em;
-    }
-    header div nav a{
-        padding: 10px 12px;
-        margin-right: 20px;
-        font-size: 2em;
-    }
-    header div nav a:hover{
-        color: #000000;
-    }
-    header h1 {
-        font-size: 4em;
-    }
-    header h1:hover{
-        transition: 1s;
-        transform: scale(1.3);
+}
+@media (max-width: 245px) {
+    h1 {
+        font-size: 1.5em;
     }
 }

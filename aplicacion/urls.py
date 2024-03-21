@@ -1,5 +1,7 @@
 from django.urls import path, include
 from .views import *
+from django.contrib.auth.views import LogoutView
+
 urlpatterns = [
     path('', home,name="home"),
     path('about/', about,name="about"),
@@ -8,12 +10,18 @@ urlpatterns = [
     path('clientes/', clientes,name="clientes"),
     path('empleados/', empleados,name="empleados"),
     #---------------------------------------------------Formularios
-    path('clienteForm/', clienteForm, name="cliente_form"),
-    path('empleadoForm/', empleadoForm, name="empleado_form"),
-    path('productoForm/', productoForm, name="producto_form"),
+    path('clienteCreate/', clienteCreate, name="cliente_create"),
+    path('clienteUpdate/<id_cliente>/', clienteUpdate, name="cliente_update"),
+    path('clienteDelete/<id_cliente>/', clienteDelete, name="cliente_delete"),
     
-    #LOGIN
-    # path('login/', login,name="login"),
+    path('empleadoCreate/', empleadoCreate, name="empleado_create"),
+    path('empleadoUpdate/<id_empleado>/', empleadoUpdate, name="empleado_update"),
+    path('empleadoDelete/<id_empleado>/', empleadoDelete, name="empleado_delete"),
+    
+    path('productoCreate/', productoCreate, name="producto_create"),
+    path('productoUpdate/<id_producto>/', productoUpdate, name="producto_update"),
+    path('productoDelete/<id_producto>/', productoDelete, name="producto_delete"),
+    
     #----------------------------------------------------Busqueda
     path('buscar_clientes/', buscarClientes, name="buscar_clientes"),
     path('encontrar_clientes/', encontrarClientes, name="encontrar_clientes"),
@@ -21,4 +29,12 @@ urlpatterns = [
     path('encontrar_empleados/', encontrarEmpleados, name="encontrar_empleados"),
     path('buscar_productos/', buscarProductos, name="buscar_productos"),
     path('encontrar_productos/', encontrarProductos, name="encontrar_productos"),
-]
+    #----------------------------------------------------Login, logout, registration
+    path('login/', login_request, name='login'),
+    path('logout/',LogoutView.as_view(template_name="aplicacion/logout.html"), name='logout'),
+    path('registrar/', register , name='registrar'),
+    #----------------------------------------------------Edicion perfil, Cambio de clave, Avatar
+    path('perfil/',editProfile, name="perfil"),
+    path('<int:pk>/password/',CambiarClave.as_view(), name='cambiar_clave'),
+    path('agregarAvatar/',agregarAvatar, name="agregar_avatar"),
+]  
