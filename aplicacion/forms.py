@@ -1,7 +1,7 @@
 from django import forms
+from .models import Pedido
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-
 
 class ClienteForm(forms.Form):
     nombre = forms.CharField(max_length=50,required=True)
@@ -27,7 +27,7 @@ class ProductoForm(forms.Form):
 class RegistroForm(UserCreationForm):
     email = forms.EmailField(required=True)
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
-    password1 = forms.CharField(label="Confirma tu contraseña", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Confirma tu contraseña", widget=forms.PasswordInput)
     
     class Meta:
         model = User
@@ -37,8 +37,6 @@ class UserEditForm(UserChangeForm):
     email = forms.EmailField(required=True)
     first_name = forms.CharField(label="Nombre/s", max_length=50,required=True)
     last_name = forms.CharField(label="Apellido/s", max_length=50,required=True)
-    password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
-    password1 = forms.CharField(label="Confirma tu contraseña", widget=forms.PasswordInput)
     
     class Meta:
         model = User
@@ -47,3 +45,18 @@ class UserEditForm(UserChangeForm):
 
 class AvatarForm(forms.Form):
     imagen = forms.ImageField(required=True)
+
+
+class PedidoForm(forms.Form):
+    fecha = forms.DateTimeField(required=True)
+    cliente = forms.IntegerField(required=True)
+    productos = forms.CharField(max_length=255,required=True) 
+    cantidad = forms.IntegerField(required=True)  
+    ubicacion = forms.CharField(max_length=100,required=True) 
+    estado = forms.CharField(max_length=50,required=True)
+    
+    class Meta:
+        fields = ['cliente', 'productos', 'cantidad', 'ubicacion', 'estado']
+        widgets = {
+            'fecha': forms.DateTimeInput(attrs={'readonly': 'readonly'}),  
+            }

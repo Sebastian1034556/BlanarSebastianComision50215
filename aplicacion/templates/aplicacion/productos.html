@@ -1,5 +1,12 @@
 {% extends 'aplicacion/index.html' %}
 {% block contenido%}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 {% endblock contenido%}
 
 {% block tabla_productos %}
@@ -32,14 +39,14 @@
                 <td>
                     <a
                     href="{% url 'producto_update' p.id %}"
-                    class="btn btn-primary"
-                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                    class="btn editar_tablas"
+                    style="--bs-btn-padding-y: .25rem;"
                     ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
                     </a>
                     <a
                     href="{% url 'producto_delete' p.id %}"
-                    class="btn btn-danger"
-                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                    class="btn borrar_tablas"
+                    style="--bs-btn-padding-y: .25rem;"
                     ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
                     </a>
                 </td>

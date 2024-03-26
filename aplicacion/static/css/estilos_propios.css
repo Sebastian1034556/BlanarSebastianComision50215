@@ -9,7 +9,7 @@
 body {
     font-family: sans-serif;
     background-color: #000;
-    /* background: linear-gradient(#d4d4d4,#454545); */
+    background: linear-gradient(#d4d4d4,#454545);
 }
 
 html {
@@ -45,9 +45,18 @@ button:hover,#buy_button:hover{
     margin: auto;
 }
 /*Los elementos de acciones*/
-i,.btn {
-    color: #ff4000;
+i,.editar_tablas,.borrar_tablas {
+    color: #f15000;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5em;
+    margin-top: -30px;
+    height: 0;
+    width: 0;
+    --bs-btn-padding-x: 0.5rem;
 }
+
+
 /*------------------------------HEADER-----------  */
 header{
     background-color: rgb(0, 0, 0);
@@ -106,9 +115,14 @@ header .navigation{
     border-radius: 10px;
     border: 1px solid black;
 }
+.logout:hover {
+    color: #000000;
+    background-color: #ffffff;
+}
 .nombre_usuario {
     color: #ffffff;
     margin-right: 20px;
+    margin-bottom: 10px;
 }
 
 .editar {
@@ -117,6 +131,9 @@ header .navigation{
     font-size: 0.5em;
 } 
 
+.avatar {
+    margin-top: -20%;
+}
 /*----------------------------MAIN-----------------------*/
 #hero {
     height: 60vh;
@@ -188,6 +205,21 @@ header .navigation{
     background-image: url(../assets/img/puma-removebg.png);
     margin-top: 13%;
 } 
+
+.carousel-item img {
+    mask-image: linear-gradient(
+        black 80%,
+        transparent);
+}
+
+.img_div  {
+    background-image:
+    linear-gradient(0deg,
+    rgba(0, 0, 0, 0.8), rgba(0, 0, 0,4 ));
+}
+h5 {
+    font-size: 1em;
+}
 /*---------------------------------FOOTER------------------------------------  */
 footer{
     margin-top: 30px;
@@ -252,8 +284,8 @@ input {
 
 @media (min-width: 775px) {
     body {
-        background: linear-gradient(to right,red,black,black,blue); 
-        
+        /* background: linear-gradient(to right,red,black,black,blue);  */
+        background: linear-gradient(#d4d4d4,#454545); 
         background-position: center center;
         background-repeat: repeat;
         background-size: cover;
@@ -281,9 +313,18 @@ input {
     .marcas .img-container {
         height: 60vh;
     }
-    
+    h5 {
+        margin-bottom: -30px;
+    }
     button,#buy_button {
         font-size: 2em;
+    }
+    .container_carousel {
+        background-image: url(../assets/img/paul-volkmer-updW-QUccFE-unsplash.jpg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        max-width: 700px;
     }
     footer p{
         font-size: 3em;
@@ -299,14 +340,20 @@ input {
     header h1 {
         font-size: 4em;
     }
-    /* header h1:hover{
-        transition: 1s;
-        transform: scale(1.2);
-    } */
     .texto_buscar {
         margin-top: 60px;
     }
-
+    .avatar {
+        margin-top: -35%;
+    }
+    i,.editar_tablas,.borrar_tablas {
+        padding-top: 20px;
+        height: 2em;
+        --bs-btn-padding-x: 1rem;
+    }
+    h5 {
+        font-size: 1.5rem;
+    }
     @media (max-width: 1200px){
         header .container nav a {
             font-size: 1em;
@@ -330,6 +377,7 @@ input {
     }
     
 }
+
 
 @media (max-width: 775px) {
     /* Estilos para pantallas más pequeñas */
@@ -355,6 +403,15 @@ input {
     } 
     .header_container {
         max-width: 775px;
+    }
+    .texto_buscar {
+        color: #000;
+        font-size: 0.6em;
+        font-weight: 400;
+    }
+    .carousel-caption {
+        padding-bottom: 0;
+        bottom: 0;
     }
 }
 @media (max-width: 340px) {

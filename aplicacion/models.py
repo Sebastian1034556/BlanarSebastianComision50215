@@ -13,7 +13,7 @@ class Cliente(models.Model):
 
 class Producto(models.Model):
     nombre = models.CharField(max_length=50)
-    precio  = models.FloatField(max_length=50)
+    precio  = models.FloatField()
     marca = models.CharField(max_length=50)
     stock = models.IntegerField()
     color = models.CharField(max_length=50) 
@@ -27,7 +27,7 @@ class Empleado(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     edad = models.IntegerField()
-    dni = models.IntegerField()
+    dni = models.IntegerField(unique=True)
     sueldo = models.FloatField()
     def __str__(self):
         return f"{self.nombre},{self.apellido}"
@@ -38,3 +38,14 @@ class Avatar(models.Model):
     
     def __str__(self):
         return f"{self.user} {self.imagen}"
+
+class Pedido(models.Model):
+    fecha = models.DateTimeField(auto_now_add=True)
+    cliente = models.IntegerField()
+    productos = models.CharField(max_length=255) 
+    cantidad = models.IntegerField()  
+    ubicacion = models.CharField(max_length=100) 
+    estado = models.CharField(max_length=50)  
+
+    def __str__(self):
+        return f"Pedido de {self.cliente.username} - {self.fecha}"

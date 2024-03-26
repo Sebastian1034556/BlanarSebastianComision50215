@@ -9,39 +9,41 @@
 {% endif %}
 {% endblock contenido%}
 
-{% block tabla_empleados %}
+{% block tabla_pedidos %}
 <div class="button_container">
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Apellido</th>
-                <th>Nombre</th>
-                <th>Edad</th>
-                <th>Dni</th>
-                <th>Sueldo</th>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Productos</th>
+                <th>Cantidad</th>
+                <th>Ubicación</th>
+                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
         </thead>
     
         <tbody>
-        {% for e in empleados %}
+        {% for p in pedidos %}
             <tr>
-                <td>{{ e.id }}</td>
-                <td>{{ e.apellido }}</td>
-                <td>{{ e.nombre }}</td>
-                <td>{{ e.edad }}</td>
-                <td>{{ e.dni }}</td>
-                <td>{{ e.sueldo}}</td>
+                <td>{{ p.id }}</td>
+                <td>{{ p.fecha }}</td>
+                <td>{{ p.cliente }}</td>
+                <td>{{ p.productos }}</td>
+                <td>{{ p.cantidad }}</td>
+                <td>{{ p.ubicacion}}</td>
+                <td>{{ p.estado}}</td>
                 <td>
                     <a
-                    href="{% url 'empleado_update' e.id %}"
+                    href="{% url 'pedido_update' p.id %}"
                     class="btn editar_tablas"
                     style="--bs-btn-padding-y: .25rem;"
                     ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
                     </a>
                     <a
-                    href="{% url 'empleado_delete' e.id %}"
+                    href="{% url 'pedido_delete' p.id %}"
                     class="btn borrar_tablas"
                     style="--bs-btn-padding-y: .25rem;"
                     ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
@@ -54,14 +56,14 @@
     
     </table>
 </div>
-{% endblock tabla_empleados %}
+{% endblock tabla_pedidos %}
 
 {% block formulario %}
 <div class="button_container">
-    <button  id="mostrarFormulario_empleados">Agregar empleado</button>
+    <button  id="mostrarFormulario_pedidos">Agregar pedido</button>
 </div>
-<div id="formulario_empleados" style="display: none;">
-    <form action="{% url 'empleado_create' %}" method="post">
+<div id="formulario_pedidos" style="display: none;">
+    <form action="{% url 'pedido_create' %}" method="post">
         {% csrf_token %}
         <table class="tabla_formularios">
             {{form.as_table}}
@@ -72,13 +74,13 @@
     </form>
 </div>
 <script>
-    document.getElementById("mostrarFormulario_empleados").addEventListener("click", function() {
-        document.getElementById("formulario_empleados").style.display = "block";
+    document.getElementById("mostrarFormulario_pedidos").addEventListener("click", function() {
+        document.getElementById("formulario_pedidos").style.display = "block";
     });
 </script>
 {% endblock formulario %}
 {% block busqueda %}
-<form action="{% url 'encontrar_empleados' %}" method="get">
+<form action="{% url 'encontrar_pedidos' %}" method="get">
     {% csrf_token %}
     <div class="tabla_formularios">
         <p class="texto_buscar">Ingrese un dato a buscar : <input type="text" name= "buscar" id= "buscar"></p>

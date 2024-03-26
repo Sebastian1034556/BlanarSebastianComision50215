@@ -9,6 +9,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
+from django.contrib import messages
+
+import tkinter as tk
+from tkinter.messagebox import showinfo as alert
+from tkinter.messagebox import askyesno as ask
 
 # Create your views here.
 def home(request):
@@ -35,6 +40,7 @@ def clienteCreate(request):
             cliente_dni = miForm.cleaned_data.get("dni")
             cliente = Cliente(nombre = cliente_nombre, apellido = cliente_apellido, edad = cliente_edad,dni = cliente_dni)
             cliente.save()
+            messages.add_message(request=request,level=messages.SUCCESS,message="Cliente agregado con éxito")
             return redirect(reverse_lazy('clientes'))
     else:
         miForm = ClienteForm()
@@ -70,10 +76,15 @@ def clienteUpdate(request,id_cliente):
 
 #-------------------------------------------------DELETE----------------------------------------------------------------------------------------
 @login_required
-def clienteDelete(request,id_cliente):
-    cliente = Cliente.objects.get(id = id_cliente)
-    cliente.delete()
-    return redirect(reverse_lazy('clientes'))
+def clienteDelete(request, id_cliente):
+    cliente = Cliente.objects.get(id=id_cliente)
+    if request.method == 'POST':
+        if 'confirmar' in request.POST:
+            cliente.delete()
+            messages.success(request, f"El cliente '{cliente.nombre}' ha sido eliminado exitosamente.")
+        return redirect('clientes')
+    return render(request, 'aplicacion/cliente_delete.html', {'cliente': cliente})
+
 #------------------------------------------------EMPLEADOS------------------------------------------------------------------------
 
 #------------------------------------------------CREATE------------------------------------------------------------------------
@@ -90,6 +101,7 @@ def empleadoCreate(request):
             empleado_sueldo = miForm.cleaned_data.get("sueldo")
             empleado = Empleado(nombre = empleado_nombre, apellido = empleado_apellido, edad = empleado_edad,dni = empleado_dni, sueldo = empleado_sueldo)
             empleado.save()
+            messages.add_message(request=request,level=messages.SUCCESS,message="Empleado agregado con éxito")
             return redirect(reverse_lazy('empleados'))
     else:
         miForm = EmpleadoForm()
@@ -126,12 +138,17 @@ def empleadoUpdate(request,id_empleado):
 #-------------------------------------------------DELETE----------------------------------------------------------------------------------------
 @login_required
 def empleadoDelete(request,id_empleado):
-    empleado = Empleado.objects.get(id = id_empleado)
-    empleado.delete()
-    return redirect(reverse_lazy('empleados'))
-#-----------------------------------------------PRODUCTOS------------------------------------------------------------------------
+    empleado = Empleado.objects.get(id=id_empleado)
+    if request.method == 'POST':
+        if 'confirmar' in request.POST:
+            empleado.delete()
+            messages.success(request, f"El empleado '{empleado.nombre}' ha sido eliminado exitosamente.")
+        return redirect('empleados')
+    return render(request, 'aplicacion/empleado_delete.html', {'empleado': empleado})
 
-#------------------------------------------------CREATE------------------------------------------------------------------------
+#-----------------------------------------------PRODUCTOS----------------------------------------------------------------
+
+#------------------------------------------------CREATE------------------------------------------------------------------
 @login_required
 def productoCreate(request):
     if request.method == "POST":
@@ -146,6 +163,7 @@ def productoCreate(request):
             producto_talla = miForm.cleaned_data.get("talla")
             producto = Producto(nombre = producto_nombre, precio = producto_precio, stock = producto_stock,marca = producto_marca,color = producto_color, talla = producto_talla)
             producto.save()
+            messages.add_message(request=request,level=messages.SUCCESS,message="Producto agregado con éxito")
             return redirect(reverse_lazy('productos'))
     else:
         miForm = ProductoForm()
@@ -182,14 +200,77 @@ def productoUpdate(request,id_producto):
         miForm = ProductoForm(initial={'nombre': producto.nombre, 'precio' : producto.precio, 'marca' : producto.marca ,'stock' : producto.stock, 'color' : producto.color , 'talla': producto.talla} )
     return render(request,"aplicacion/productoForm.html",{"form": miForm})
 
-#----------------------------------------------------------DELETE---------------------------------------------------------------------------
+#----------------------------------------------------------DELETE----------------------------------------------------------------------
 @login_required
 def productoDelete(request,id_producto):
-    producto = Producto.objects.get(id = id_producto)
-    producto.delete()
-    return redirect(reverse_lazy('productos'))
-
-#-------------------------------------------------------BUSCAR-----------------------------------------------------------------------------
+    producto = Producto.objects.get(id=id_producto)
+    if request.method == 'POST':
+        if 'confirmar' in request.POST:
+            producto.delete()
+            messages.success(request, f"El producto '{producto.nombre}' ha sido eliminado exitosamente.")
+        return redirect('productos')
+    return render(request, 'aplicacion/producto_delete.html', {'producto': producto})
+#----------------------------------------------------------PEDIDO----------------------------------------------------------------------
+#----------------------------------------------------------CREATE----------------------------------------------------------------------
+@login_required
+def pedidoCreate(request):
+    if request.method == "POST":
+        #Si es la 2da vez o más
+        miForm = PedidoForm(request.POST)
+        if miForm.is_valid():
+            pedido_fecha = miForm.cleaned_data.get("fecha")
+            pedido_cliente = miForm.cleaned_data.get("cliente")
+            pedido_productos =  miForm.cleaned_data.get("productos")
+            pedido_cantidad = miForm.cleaned_data.get("cantidad")
+            pedido_ubicacion = miForm.cleaned_data.get("ubicacion")
+            pedido_estado = miForm.cleaned_data.get("estado")
+            pedido = Pedido(fecha = pedido_fecha, cliente = pedido_cliente, productos = pedido_productos,cantidad = pedido_cantidad, ubicacion = pedido_ubicacion, estado = pedido_estado)
+            pedido.save()
+            messages.add_message(request=request,level=messages.SUCCESS,message="Pedido agregado con éxito")
+            return redirect(reverse_lazy('pedidos'))
+    else:
+        miForm = PedidoForm()
+        return render(request,"aplicacion/pedidos.html",{"form": miForm}) 
+#----------------------------------------------------------READ---------------------------------------------------------------------
+@login_required
+def pedidos(request):
+    formulario_pedido = PedidoForm()
+    contexto = {
+        'pedidos': Pedido.objects.all(),
+        'form': formulario_pedido
+    }
+    return render(request,"aplicacion/pedidos.html",contexto)
+#----------------------------------------------------------UPDATE----------------------------------------------------------------------
+@login_required
+def pedidoUpdate(request,id_pedido):
+    pedido = Pedido.objects.get(id = id_pedido)
+    if request.method == "POST":
+        miForm = PedidoForm(request.POST)
+        if miForm.is_valid():
+            pedido.fecha = miForm.cleaned_data.get("fecha")
+            pedido.cliente = miForm.cleaned_data.get("cliente")
+            pedido.productos =  miForm.cleaned_data.get("productos")
+            pedido.cantidad = miForm.cleaned_data.get("cantidad")
+            pedido.ubicacion = miForm.cleaned_data.get("ubicacion")
+            pedido.estado = miForm.cleaned_data.get("estado")
+            
+            pedido.save()
+            
+            return redirect(reverse_lazy('pedidos'))
+    else:
+        miForm = PedidoForm(initial={'fecha': pedido.fecha, 'cliente' : pedido.cliente, 'productos' : pedido.productos ,'cantidad' : pedido.cantidad, 'ubicacion' : pedido.ubicacion , 'estado': pedido.estado} )
+    return render(request,"aplicacion/pedidoForm.html",{"form": miForm})
+#----------------------------------------------------------DELETE----------------------------------------------------------------------
+@login_required
+def pedidoDelete(request,id_pedido):
+    pedido = Pedido.objects.get(id=id_pedido)
+    if request.method == 'POST':
+        if 'confirmar' in request.POST:
+            pedido.delete()
+            messages.success(request, f"El pedido '{id_pedido}' ha sido eliminado exitosamente.")
+        return redirect('pedidos')
+    return render(request, 'aplicacion/pedido_delete.html', {'pedido': pedido})
+#-------------------------------------------------------BUSCAR-------------------------------------------------------------------------
 @login_required
 def buscarClientes(request):
     return render(request,"aplicacion/buscar.html")
@@ -256,6 +337,28 @@ def encontrarProductos(request):
     contexto = {"productos": productos}
     return render(request, "aplicacion/productos.html", contexto)
 
+@login_required
+def buscarPedidos(request):
+    return render(request,"aplicacion/buscar.html")
+
+@login_required
+def encontrarPedidos(request):
+    patron = request.GET.get("buscar")
+    if patron:
+        pedidos = Pedido.objects.filter(            
+            Q(id__icontains=patron) |
+            Q(fecha__icontains=patron) |
+            Q(cliente__icontains=patron) |
+            Q(productos__icontains=patron) |
+            Q(cantidad__icontains=patron) |
+            Q(ubicacion__icontains=patron) |
+            Q(estado__icontains=patron)
+)
+    else:
+        pedidos = Pedido.objects.all()
+    
+    contexto = {"pedidos": pedidos}
+    return render(request, "aplicacion/pedidos.html", contexto)
 
 
 #------------------------------------------LOGIN, LOGOUT, AUTHENTICATION, REGISTRATION-------------------------------------------------------
@@ -317,9 +420,11 @@ def editProfile(request):
     
     return render(request,"aplicacion/editarPerfil.html",{"form": miForm})
 
-class CambiarClave(LoginRequiredMixin,PasswordChangeView):
+
+class CambiarClave(LoginRequiredMixin, PasswordChangeView):
     template_name = "aplicacion/cambiar_clave.html"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("home")  
+
 
 @login_required
 def agregarAvatar(request):
@@ -345,3 +450,4 @@ def agregarAvatar(request):
         miForm = AvatarForm()
     
     return render(request,"aplicacion/agregarAvatar.html",{"form": miForm})
+
