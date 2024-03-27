@@ -399,7 +399,7 @@ def register(request):
     
     return render(request,"aplicacion/registro.html",{"form": miForm})
 
-#------------------------------------------EDICIÓN DE PERFIL, CAMBIO DE CLAVE, AVATAR,-------------------------------------------------------
+#------------------------------------------EDICIÓN DE PERFIL, CAMBIO DE CLAVE,AVATAR-------------------------------------
 @login_required
 def editProfile(request):
     usuario = request.user
@@ -451,3 +451,6 @@ def agregarAvatar(request):
     
     return render(request,"aplicacion/agregarAvatar.html",{"form": miForm})
 
+#------------------------------------------ABOUT ME-------------------------------------------------------------------
+def aboutMe(request):
+    return render(request,"aplicacion/about_me.html")

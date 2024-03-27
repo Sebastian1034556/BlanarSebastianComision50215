@@ -73,8 +73,12 @@
 </div>
 <script>
     document.getElementById("mostrarFormulario_empleados").addEventListener("click", function() {
-        document.getElementById("formulario_empleados").style.display = "block";
-    });
+        if (window.location.href.indexOf("{% url 'empleados' %}") == -1) {
+            window.location.href = "{% url 'empleados' %}";
+        }});
+        document.getElementById("mostrarFormulario_empleados").addEventListener("click", function() {
+            document.getElementById("formulario_empleados").style.display = "block";
+        });
 </script>
 {% endblock formulario %}
 {% block busqueda %}

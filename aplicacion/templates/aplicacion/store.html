@@ -66,3 +66,16 @@
         <script src="{% static 'js/scripts.js' %}"></script>
     </body>
 </html>
+        {% comment %} document.getElementById("mostrarFormulario").addEventListener("click", function() {
+            document.getElementById("formulario").style.display = "block";
+        });  {% endcomment %}
+        document.getElementById("mostrarFormulario").addEventListener("click", function() {
+            if (window.location.href.indexOf("{% url 'clientes' %}") == -1) {
+                // Si no está en la página de clientes, realiza la redirección
+                window.location.href = "{% url 'clientes' %}";
+            }}) else {
+                // Si ya está en la página de clientes, muestra el formulario directamente
+                document.getElementById("mostrarFormulario").addEventListener("click", function() {
+                    document.getElementById("formulario").style.display = "block";
+                });
+            };

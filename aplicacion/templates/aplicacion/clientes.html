@@ -73,6 +73,11 @@
     </div>
     <script>
         document.getElementById("mostrarFormulario").addEventListener("click", function() {
+        if (window.location.href.indexOf("{% url 'clientes' %}") == -1) {
+            // Si no está en la página de clientes, realiza la redirección
+            window.location.href = "{% url 'clientes' %}";
+        }});
+        document.getElementById("mostrarFormulario").addEventListener("click", function() {
             document.getElementById("formulario").style.display = "block";
         });
     </script>

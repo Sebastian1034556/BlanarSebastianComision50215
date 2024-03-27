@@ -75,8 +75,12 @@
     </div>
     <script>
         document.getElementById("mostrarFormulario").addEventListener("click", function() {
-            document.getElementById("formulario").style.display = "block";
-        });
+            if (window.location.href.indexOf("{% url 'productos' %}") == -1) {
+                window.location.href = "{% url 'productos' %}";
+            }});
+            document.getElementById("mostrarFormulario").addEventListener("click", function() {
+                document.getElementById("formulario").style.display = "block";
+            });
     </script>
 {% endblock formulario %}
 {% block busqueda %}

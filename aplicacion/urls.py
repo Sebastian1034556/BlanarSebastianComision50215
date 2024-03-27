@@ -14,7 +14,6 @@ urlpatterns = [
     path('clienteCreate/', clienteCreate, name="cliente_create"),
     path('clienteUpdate/<id_cliente>/', clienteUpdate, name="cliente_update"),
     path('cliente_delete/<id_cliente>/', clienteDelete, name='cliente_delete'),
-    # path('clienteDelete/<id_cliente>/', clienteDelete, name="cliente_delete"),
     
     path('empleadoCreate/', empleadoCreate, name="empleado_create"),
     path('empleadoUpdate/<id_empleado>/', empleadoUpdate, name="empleado_update"),
@@ -48,4 +47,6 @@ urlpatterns = [
     path('perfil/',editProfile, name="perfil"),
     path('<int:pk>/password/',CambiarClave.as_view(), name='cambiar_clave'),        
     path('agregarAvatar/',agregarAvatar, name="agregar_avatar"),
+    #----------------------------------------------------About me
+    path('about_me/',aboutMe, name="about_me"),
 ]  

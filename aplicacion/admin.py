@@ -14,4 +14,5 @@ class LoginAdmin(admin.ModelAdmin):
 admin.site.register(Cliente,ClienteAdmin)
 admin.site.register(Producto)
 admin.site.register(Empleado)
+admin.site.register(Pedido)
 # admin.site.register(Login,LoginAdmin)
