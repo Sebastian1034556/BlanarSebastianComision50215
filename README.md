@@ -21,3 +21,6 @@ Se puede acceder al about me mediante su respectiva ruta, añadiendo about_me al
 
 **Video en Youtube**
 https://youtu.be/F01yrkiPAeM?si=XykwF4TwVGehBF4A
+
+**Excel con Unit Test**
+https://1drv.ms/x/c/eafc6f93c5d4e7da/EWM4X0oK1gFPkbwf0CC2jsoB0PaM0DDwzZCny4PAv00Bow?e=8pxOoj
