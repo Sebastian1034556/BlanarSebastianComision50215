@@ -159,9 +159,6 @@ header .navigation{
     font-size: 0.5em;
 } 
 
-div a .avatar {
-    margin-top: -20%;
-}
 /*----------------------------MAIN-----------------------*/
 #hero {
     height: 60vh;
@@ -410,9 +407,9 @@ input {
 
 @media (max-width: 775px) {
     /* Estilos para pantallas más pequeñas */
-    th,td {
+    .table th, .table td {
         font-size: 10px;
-        padding: 4px;
+        padding: 0.5rem 0.2rem;
     }
     .table {
         border-spacing: 10px ;
@@ -441,6 +438,13 @@ input {
     .carousel-caption {
         padding-bottom: 0;
         bottom: 0;
+    }
+    div a .avatar {
+        margin-top: -15%;
+    }
+    .table--pedidos th, .table--pedidos td {
+    padding: 2x 2px;
+    font-size: 9px;
     }
 }
 @media (max-width: 340px) {

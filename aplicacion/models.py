@@ -40,7 +40,7 @@ class Avatar(models.Model):
         return f"{self.user} {self.imagen}"
 
 class Pedido(models.Model):
-    fecha = models.DateTimeField(auto_now_add=True)
+    fecha = models.DateField(auto_now_add=True)
     cliente = models.IntegerField()
     productos = models.CharField(max_length=255) 
     cantidad = models.IntegerField()  
@@ -48,4 +48,4 @@ class Pedido(models.Model):
     estado = models.CharField(max_length=50)  
 
     def __str__(self):
-        return f"Pedido de {self.cliente.username} - {self.fecha}"
+        return self.fecha.strftime('%d/%m/%Y')
