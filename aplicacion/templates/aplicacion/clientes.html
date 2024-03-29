@@ -74,7 +74,7 @@
     <script>
         document.getElementById("mostrarFormulario").addEventListener("click", function() {
         if (window.location.href.indexOf("{% url 'clientes' %}") == -1) {
-            // Si no está en la página de clientes, realiza la redirección
+            // Si no está en la página normal (si está en la modificada al buscar), se hace la redirección para evitar errores
             window.location.href = "{% url 'clientes' %}";
         }});
         document.getElementById("mostrarFormulario").addEventListener("click", function() {

@@ -11,10 +11,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib import messages
 
-import tkinter as tk
-from tkinter.messagebox import showinfo as alert
-from tkinter.messagebox import askyesno as ask
-
 # Create your views here.
 def home(request):
     return render(request,"aplicacion/index.html")

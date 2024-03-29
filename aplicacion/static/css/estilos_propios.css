@@ -76,15 +76,6 @@ i,.editar_tablas,.borrar_tablas {
     margin-top: 30px;
     color: #fff;
 }
-
-
-
-
-
-
-
-
-
 /*------------------------------HEADER-----------  */
 header{
     background-color: rgb(0, 0, 0);
@@ -309,8 +300,8 @@ input {
 /* MEDIA QUERIES */
 
 @media (min-width: 775px) {
+    /* Solo para dispositivos mas grandes */
     body {
-        /* background: linear-gradient(to right,red,black,black,blue);  */
         background: linear-gradient(#d4d4d4,#454545); 
         background-position: center center;
         background-repeat: repeat;
@@ -319,7 +310,6 @@ input {
     header .container {
         max-width: none;
         background: #000;
-        /* background: linear-gradient(to right,black,rgb(255, 4, 0)); */
     }
     header nav {
         flex-direction: row;
@@ -329,13 +319,8 @@ input {
         background-image: none;
         background-color: transparent;
         background: linear-gradient(to right,rgb(0, 0, 92),black);
-        /* background-color: #001F3F; */
     }
-    #hero {
-        background-image: url(../assets/img/adetayo-adepoju-ZEJXkYyh--8-unsplash.jpg);
-        filter: saturate(3);
-        height: 90vh;
-    }
+    
     .marcas .img-container {
         height: 60vh;
     }
@@ -345,13 +330,7 @@ input {
     button,#buy_button {
         font-size: 2em;
     }
-    .container_carousel {
-        background-image: url(../assets/img/paul-volkmer-updW-QUccFE-unsplash.jpg);
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        max-width: 700px;
-    }
+
     footer p{
         font-size: 3em;
     }
@@ -387,6 +366,7 @@ input {
         }
     }
     @media (max-width: 980px){
+        /* Dispositivos tamaño intermedio */
         header .container nav a {
             font-size: 0.8em;
             padding: 30px 5px;
@@ -403,10 +383,9 @@ input {
     }
     
 }
-
-
 @media (max-width: 775px) {
     /* Estilos para pantallas más pequeñas */
+    /* Tablas */
     .table th, .table td {
         font-size: 10px;
         padding: 0.5rem 0.2rem;
@@ -414,6 +393,7 @@ input {
     .table {
         border-spacing: 10px ;
     }
+    /* Header */
     .logout {
         margin-top: 0;
         font-size: 0.8em;
@@ -430,6 +410,7 @@ input {
     .header_container {
         max-width: 775px;
     }
+    /* Otras configuraciones específicas */
     .texto_buscar {
         color: #000;
         font-size: 0.6em;
