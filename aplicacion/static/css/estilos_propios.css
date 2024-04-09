@@ -44,6 +44,10 @@ button:hover,#buy_button:hover{
     max-width: 700px;
     margin: auto;
 }
+
+#ctrlbtn1:hover,#ctrlbtn2:hover,#ctrlbtn3:hover,#ctrlbtn4:hover  {
+    background-color: transparent;
+}
 /*Los elementos de acciones*/
 i,.editar_tablas,.borrar_tablas {
     color: #f15000;
@@ -237,6 +241,93 @@ h5 {
     font-size: 1em;
     font-weight: bold;
 }
+
+/* PAGINA DE PRODUCTOS */
+.products-hero {
+    display: none;
+}
+
+.products-hero__img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+.product-card_container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.product-card {
+    margin: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    width: fit-content;
+    flex-grow: 1;
+    background: linear-gradient(to bottom, #2196f3, #f8fcff);
+}
+/* #2196f3 #f8fcff  #00b5c6  #001d7b*/
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    width: 40vh;
+    height: 40vh;
+    display: block;
+    filter: saturate(2);
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    padding: 15px;
+    color: #fff;
+    background-color: #0000006f;
+    width: 100%;
+}
+.product-info h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+/* #0000006f */
+
+.product-info .price {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.add-to-cart {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #0056b3;
+}
+
+.products__adidas {
+    color: #fff;
+    font-weight: bolder;
+}
+
 /*---------------------------------FOOTER------------------------------------  */
 footer{
     margin-top: 30px;
@@ -302,7 +393,7 @@ input {
 @media (min-width: 775px) {
     /* Solo para dispositivos mas grandes */
     body {
-        background: linear-gradient(#d4d4d4,#454545); 
+        background: linear-gradient(#d4d4d4,#777777); 
         background-position: center center;
         background-repeat: repeat;
         background-size: cover;
@@ -340,7 +431,8 @@ input {
         font-size: 1.5em;
     }
     header div nav a:hover{
-        color: #000000;
+        background-color: rgb(0, 0, 150);
+        /* color: rgb(255, 199, 0); */
     }
     header h1 {
         font-size: 4em;
@@ -358,6 +450,9 @@ input {
     }
     h5 {
         font-size: 1.5rem;
+    }
+    .products-hero {
+        display: block;
     }
     @media (max-width: 1200px){
         header .container nav a {

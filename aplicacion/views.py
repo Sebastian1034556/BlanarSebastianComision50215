@@ -18,8 +18,6 @@ def home(request):
 def store(request):
     return render(request,"aplicacion/store.html")
 
-def about(request):
-    return render(request,"aplicacion/about.html")
 
 #-----------------------------------------------CLIENTES------------------------------------------------------------------------
 
@@ -126,7 +124,7 @@ def empleadoUpdate(request,id_empleado):
             empleado.sueldo = miForm.cleaned_data.get("sueldo")
             empleado.save()
             
-            return redirect(reverse_lazy('empleados'))
+            return redirect(reverse_lazy('empleados'))  
     else:
         miForm = EmpleadoForm(initial={'nombre': empleado.nombre, 'apellido' : empleado.apellido, 'edad' : empleado.edad , 'dni' : empleado.dni , 'sueldo': empleado.sueldo} )
     return render(request,"aplicacion/empleadoForm.html",{"form": miForm})

@@ -1,0 +1,148 @@
+{% extends "aplicacion/index.html" %}
+
+
+{% block titulo %}
+<h1 class="mb-5">Productos</h1>
+{% endblock titulo %}
+
+
+{% block contenido %}
+{% load static%}
+
+<section>
+    <div class="products-hero">
+        <img class="products-hero__img" src="{% static 'assets/img/lightblue.jpg' %}"></img>
+
+    </div> 
+</section>
+<section>
+    <div class="button_container">
+        <h2 class="products__adidas">ADIDAS</h2>
+    </div>
+    
+    <div class="product-card_container">
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidasultraboost-light-23.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Ultra Boost</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidas-alphaboost-v1.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Alphaboost</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidas-terrex-ax4.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Terrex Ax4</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidas-free-hiker-2.0-gore-tex.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Free Hiker 2.0</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+        
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidas-galaxy-6.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Galaxy 6</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidas-court-jam.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Court Jam</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidas-gazelle-indoor.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Gazelle Indoor</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidas-samba-og.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Samba Og</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidas-forum-low.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Forum Low</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidas-grand-court-2.0-shoes.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Grand Court 2.0</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidas-swift-run-2.0-shoes.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Swift Run 2.0</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidas-run-80s-shoes.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Run 80s</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidas-rivalry-low-shoes.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Rivalry Low</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidas-racer-tr23.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Racer Tr23</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="{% static 'assets/img/adidas-swift-run-1.0-shoes.png' %}" alt="Nike Dunk Low">
+            <div class="product-info">
+                <h3>Adidas Swift Run 1.0</h3>
+                <p class="price">$100</p>
+                <button class="add-to-cart">Agregar al Carrito</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock contenido %}
