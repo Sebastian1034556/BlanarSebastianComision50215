@@ -376,20 +376,20 @@ def login_request(request):
         else: 
             return redirect(reverse_lazy('login'))
     else:
-        miForm = AuthenticationForm()
+        miForm = CustomAuthenticationForm()
     
     return render(request,"aplicacion/login.html",{"form": miForm})
 
 def register(request):
     if request.method == "POST":
-        miForm = RegistroForm(request.POST)
+        miForm = CustomUserCreationForm(request.POST)
         
         if miForm.is_valid():
             usuario = miForm.cleaned_data.get("username")
             miForm.save()
             return redirect(reverse_lazy('home'))
     else:
-        miForm = RegistroForm()
+        miForm = CustomUserCreationForm()
     
     return render(request,"aplicacion/registro.html",{"form": miForm})
 

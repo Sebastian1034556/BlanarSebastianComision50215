@@ -327,7 +327,77 @@ h5 {
     color: #fff;
     font-weight: bolder;
 }
+/* Prueba Login */
+.login-body {
+    background: url(../assets/imagenes/white1.jpg);
+    height: 100vh;
+    display: grid;
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    place-items:center;
+    overflow: hidden;
+    align-items: center;
+}
+.form_container {
+    margin-top: 5px;
+    background: #e9e9e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.7rem;
+    height: 70vh;
+    max-width: 1000px;
+}
+#form__img-container {
+    height: 100%;
+}
+.form__items .h1_container {
+    margin-top: 0px;
+}
+.form__items h1 {
+    color: #a4a4a4;
+}
+.form__img {
+    width: 125%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(2);
+    margin-right: 40px;
+}
+.form__btn {
+    background-color: #0367a6;
+    background-image: linear-gradient(90deg, #0367a6 0%,#008997 74%);
+    border-radius: 20px;
+    border: 1px solid #0367a6;;
+    color: #e9e9e9;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+}
+.login-form {
+    margin: 30px 22px ;
+}
+.form__btn {
+    margin-top: 0.5rem;
+}
 
+.back {
+    margin-top: 3%;
+    background-color: #0367a6;
+    background-image: linear-gradient(90deg,  #e10e0e 0%,#da0909  74%);
+}
+.register--container {
+    height: 80vh;
+}
+.register--container li,.register--container span {
+    display: none;
+}
+.register--body {
+    margin-right: 130px;
+}
 /*---------------------------------FOOTER------------------------------------  */
 footer{
     margin-top: 30px;
@@ -387,6 +457,9 @@ input {
 .tabla_formularios label {
     color: #000000;
 }
+.mobile {
+    display: none;
+}
 
 /* MEDIA QUERIES */
 
@@ -441,7 +514,7 @@ input {
         margin-top: 60px;
     }
     .avatar {
-        margin-top: -35%;
+        margin-top: -20%;
     }
     i,.editar_tablas,.borrar_tablas {
         padding-top: 20px;
@@ -521,6 +594,16 @@ input {
     .table--pedidos th, .table--pedidos td {
     padding: 2x 2px;
     font-size: 9px;
+    }
+    /* LOGIn */
+    .login-body {
+        background: #e9e9e9;
+    }
+    .form_container {
+        margin-top: 80px;
+    }
+    .login-body .img_container {
+        display: none;
     }
 }
 @media (max-width: 340px) {

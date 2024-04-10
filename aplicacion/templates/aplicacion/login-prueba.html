@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    
+
+{% block titulo %}
+<h1 class="mb-5">Login (formulario)</h1>
+{% endblock titulo %}
+
+
+{% block contenido %}
+    
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Enviar">
+</form>
+
+<div class="container2 right-panel-active">
+
+    <div class="container2__form container2--signup" >
+        <form action="" class="form" id="form1"></form>
+        <h2 class="form__title"></h2>
+        <input class="input" type="text" placeholder="texto">
+        <input class="input" type="text" placeholder="texto">
+        <input class="input" type="text" placeholder="texto">
+        <button class="form__btn">SIGN UP</button>
+    </div>
+
+
+
+    <div class="container2 right-panel-active">
+        <div class="container2__form container2--signin" >
+            <form action="" class="form" id="form1"></form>
+            <h2 class="form__title"></h2>
+            <input class="input" type="text" placeholder="texto">
+            <input class="input" type="text" placeholder="texto">
+            <input class="input" type="text" placeholder="texto">
+            <button class="form__btn">SIGN IN</button>
+        </div>
+    </div>
+
+    <div class="container2__overlay">
+        <div class="overlay">
+            <div class="overlay__panel overlay--left">
+                <button class="form__btn" id="signin">SIGN IN</button>
+            </div>
+            <div class="overlay__panel overlay--right">
+                <button class="form__btn" id="signin">SIGN UP</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
+
+</body>
+</html>

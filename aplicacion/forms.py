@@ -2,12 +2,19 @@ from django import forms
 from .models import Pedido
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import AuthenticationForm
 
 class ClienteForm(forms.Form):
     nombre = forms.CharField(max_length=50,required=True)
     dni = forms.IntegerField(required=True)
     apellido = forms.CharField(max_length=50,required=True)
     edad = forms.IntegerField(required=True)
+
+    def clean_dni(self):
+        dni = self.cleaned_data['dni']
+        if not isinstance(dni, int) or len(str(dni)) != 8:
+            raise forms.ValidationError('El DNI debe ser un número de 8 dígitos.')
+        return dni
 
 class EmpleadoForm(forms.Form):
     nombre = forms.CharField(max_length=50,required=True)
@@ -60,3 +67,16 @@ class PedidoForm(forms.Form):
         widgets = {
             'fecha': forms.DateTimeInput(attrs={'readonly': 'readonly'}),  
             }
+        
+class CustomAuthenticationForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].label = "Usuario"
+
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+    password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Confirma tu contraseña", widget=forms.PasswordInput)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].label = "Usuario"

@@ -1,4 +1,4 @@
-{% extends "aplicacion/index.html" %}
+{% comment %} {% extends "aplicacion/index.html" %}
 
 
 {% block titulo %}
@@ -16,4 +16,66 @@
     <input type="submit" value="Enviar">
 </form>
 
-{% endblock contenido %}
+{% endblock contenido %} {% endcomment %}
+{% comment %} <form action="" method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Enviar">
+</form> {% endcomment %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link href="{% static 'css/estilos_propios.css' %}" rel="stylesheet"/>
+</head>
+<body class="login-body register--body">
+    <div class="container form_container register--container">
+        <div class="form__items">
+            <div class="button_container h1_container">
+                <h1>Registro</h1>
+            </div>
+            <form class="login-form" action="" method="post">
+                {% csrf_token %}
+                <table>
+                    <div class="desktop">
+                    {{ form.as_table }}
+                    </div>                    
+                </table>
+
+                <div class="button_container">
+                    <input class="form__btn" id="login" type="submit" value="INICIAR SESIÓN">
+                </div>
+            </form>
+            <div class="button_container">
+                <form action="{% url 'home' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="form__btn back">REGRESAR</button>
+                </form>
+            </div>
+        </div>
+        <div class="img_container" id="form__img-container">
+            <img class="form__img" src="{% static 'assets/imagenes/niklas.jpg' %}" alt="">
+        </div>
+</div>
+</body>
+
+
+
+
+
+
+
+<!-- <form action="" method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Enviar">
+</form> -->
