@@ -3,6 +3,8 @@ from django.db.models import Q
 from .models import *
 from .forms import *
 from django.urls import reverse_lazy
+from django.http import JsonResponse
+
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
@@ -33,9 +35,14 @@ def clienteCreate(request):
             cliente_edad =  miForm.cleaned_data.get("edad")
             cliente_dni = miForm.cleaned_data.get("dni")
             cliente = Cliente(nombre = cliente_nombre, apellido = cliente_apellido, edad = cliente_edad,dni = cliente_dni)
-            cliente.save()
-            messages.add_message(request=request,level=messages.SUCCESS,message="Cliente agregado con éxito")
-            return redirect(reverse_lazy('clientes'))
+            
+            if not isinstance(cliente_dni,int) or cliente_dni > 99999999:
+                return JsonResponse({'error': 'El DNI debe ser un número de 8 dígitos'}, status=400)
+                
+            else:
+                cliente.save()
+                messages.add_message(request=request,level=messages.SUCCESS,message="Cliente agregado con éxito")
+                return redirect(reverse_lazy('clientes'))
     else:
         miForm = ClienteForm()
         return render(request,"aplicacion/clientes.html",{"form": miForm}) 

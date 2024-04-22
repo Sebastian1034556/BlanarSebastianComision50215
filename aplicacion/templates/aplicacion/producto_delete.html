@@ -1,26 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static%}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmar Eliminación</title>
-    <link href="{% static 'css/estilos_propios.css' %}" rel="stylesheet"/>
-</head>
-<body style="background:linear-gradient(white,white)">
+{% extends "aplicacion/index.html" %}
+{% block contenido %}
+<div class="button_container">
+    <h1 class="h1_delete">¿Estás seguro eliminar al producto '{{ producto.nombre }}'?</h1>
+</div>
+<form method="post">
+    {% csrf_token %}
     <div class="button_container">
-        <h1>¿Estás seguro de que deseas eliminar al producto '{{ producto.nombre }}'?</h1>
+        <button class="btn btn-success logout editar" style="margin-right: 0;" type="submit" name="confirmar">Confirmar</button>
     </div>
-    <form method="post">
-        {% csrf_token %}
-        <div class="button_container">
-            <button class="btn btn-success logout editar" style="margin-right: 0;" type="submit" name="confirmar">Confirmar</button>
-        </div>
-    </form>
-    <form action="{% url 'productos' %}">
-        <div class="button_container">
-            <button class="btn btn-success logout" type="submit">Cancelar</button>
-        </div>
-    </form>
-</body>
-</html>
+</form>
+<form action="{% url 'productos' %}">
+    <div class="button_container">
+        <button class="btn btn-success logout cancel" type="submit">Cancelar</button>
+    </div>
+</form>
+{% endblock contenido%}

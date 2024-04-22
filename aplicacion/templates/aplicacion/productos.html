@@ -60,9 +60,9 @@
 {% endblock tabla_productos%}
 {% block formulario %}
 <div class="button_container">
-    <button  id="mostrarFormulario">Agregar Producto</button>
+    <button  id="mostrarFormularioProductos">Agregar Producto</button>
 </div>
-    <div id="formulario" style="display: none;">
+    <div id="formulario_productos" style="display: none;">
         <form  action="{% url 'producto_create' %}" method="post">
             {% csrf_token %}
             <table class="tabla_formularios">
@@ -73,15 +73,6 @@
             </div>
         </form>
     </div>
-    <script>
-        document.getElementById("mostrarFormulario").addEventListener("click", function() {
-            if (window.location.href.indexOf("{% url 'productos' %}") == -1) {
-                window.location.href = "{% url 'productos' %}";
-            }});
-            document.getElementById("mostrarFormulario").addEventListener("click", function() {
-                document.getElementById("formulario").style.display = "block";
-            });
-    </script>
 {% endblock formulario %}
 {% block busqueda %}
 <form action="{% url 'encontrar_productos' %}" method="get">

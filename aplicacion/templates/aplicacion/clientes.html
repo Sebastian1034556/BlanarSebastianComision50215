@@ -58,29 +58,22 @@
 {% endblock tabla_clientes%}
 {% block formulario %}
 <div class="button_container">
-    <button  id="mostrarFormulario">Agregar Cliente</button>
+    <button id="mostrarFormularioClientes">Agregar Cliente</button>
 </div>
-    <div id="formulario" style="display: none;">
-        <form action="{% url 'cliente_create' %}" method="post">
-            {% csrf_token %}
-            <table class="tabla_formularios">
-                {{form.as_table}}
-            </table>
-            <div class="form">
-                <input class="guardar" type="submit" value="Guardar">
-            </div>
-        </form>
-    </div>
-    <script>
-        document.getElementById("mostrarFormulario").addEventListener("click", function() {
-        if (window.location.href.indexOf("{% url 'clientes' %}") == -1) {
-            // Si no está en la página normal (si está en la modificada al buscar), se hace la redirección para evitar errores
-            window.location.href = "{% url 'clientes' %}";
-        }});
-        document.getElementById("mostrarFormulario").addEventListener("click", function() {
-            document.getElementById("formulario").style.display = "block";
-        });
-    </script>
+
+<div id="formulario_clientes" style="display: none;">
+    <form id="cliente-form" action="{% url 'cliente_create' %}" method="post">
+        {% csrf_token %}
+        <table class="tabla_formularios">
+            {{form.as_table}}
+        </table>
+        <div class="form">
+            <input class="guardar" type="submit" value="Guardar">
+        </div>
+    </form>
+    <div id="error-message" style="color: red;"></div>
+</div>
+
 {% endblock formulario %}
 
 {% block busqueda %}

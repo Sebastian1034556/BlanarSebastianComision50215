@@ -58,7 +58,7 @@
 
 {% block formulario %}
 <div class="button_container">
-    <button  id="mostrarFormulario_empleados">Agregar empleado</button>
+    <button  id="mostrarFormularioEmpleados">Agregar empleado</button>
 </div>
 <div id="formulario_empleados" style="display: none;">
     <form action="{% url 'empleado_create' %}" method="post">
@@ -71,15 +71,7 @@
         </div>
     </form>
 </div>
-<script>
-    document.getElementById("mostrarFormulario_empleados").addEventListener("click", function() {
-        if (window.location.href.indexOf("{% url 'empleados' %}") == -1) {
-            window.location.href = "{% url 'empleados' %}";
-        }});
-        document.getElementById("mostrarFormulario_empleados").addEventListener("click", function() {
-            document.getElementById("formulario_empleados").style.display = "block";
-        });
-</script>
+
 {% endblock formulario %}
 {% block busqueda %}
 <form action="{% url 'encontrar_empleados' %}" method="get">

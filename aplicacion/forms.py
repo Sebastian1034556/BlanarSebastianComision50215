@@ -10,11 +10,6 @@ class ClienteForm(forms.Form):
     apellido = forms.CharField(max_length=50,required=True)
     edad = forms.IntegerField(required=True)
 
-    def clean_dni(self):
-        dni = self.cleaned_data['dni']
-        if not isinstance(dni, int) or len(str(dni)) != 8:
-            raise forms.ValidationError('El DNI debe ser un número de 8 dígitos.')
-        return dni
 
 class EmpleadoForm(forms.Form):
     nombre = forms.CharField(max_length=50,required=True)
