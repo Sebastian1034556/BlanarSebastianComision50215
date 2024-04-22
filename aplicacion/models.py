@@ -8,28 +8,6 @@ class Cliente(models.Model):
     edad = models.IntegerField()
     dni = models.IntegerField()
     
-    def clean(self):
-        dni_str = str(self.dni)
-        if not (8 <= len(dni_str) <= 10):
-            raise ValidationError({'dni': 'El DNI debe tener entre 8 y 10 dígitos.'})
-        # Validar que nombre y apellido solo contengan letras y espacios
-        for field_value, field_name in [(self.nombre, 'nombre'), (self.apellido, 'apellido')]:
-            
-            for char in field_value:
-                if not char.isalpha():
-                    raise ValidationError({field_name: f'El {field_name} solo puede contener letras.'})
-            
-            if len(field_value) < 3:
-                raise ValidationError({field_name: f'El {field_name} debe tener al menos 3 caracteres.'})
-
-    
-    def save(self, *args, **kwargs):
-        self.full_clean()  # Esto llama a self.clean() y valida el modelo.
-        super(Cliente, self).save(*args, **kwargs)
-        
-    def __str__(self):
-        return f"{self.nombre},{self.apellido}"
-
 class Producto(models.Model):
     nombre = models.CharField(max_length=50)
     precio  = models.FloatField()
