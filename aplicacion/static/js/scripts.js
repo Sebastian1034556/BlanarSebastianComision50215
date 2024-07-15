@@ -46,6 +46,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#adidas_section").addEventListener("click", function(){
-        
     })
+});
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector("#ctrlbtn1").addEventListener("click", function(){
+        document.querySelector(".carousel__img").style.opacity = "1";
+    });
+    document.querySelector("#ctrlbtn2").addEventListener("click", function(){
+        document.querySelector(".carousel__img").style.opacity = "1";
+    });
+});
+
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        document.querySelector(".carousel__img").style.opacity = "1";
+    }, 13500); 
 });

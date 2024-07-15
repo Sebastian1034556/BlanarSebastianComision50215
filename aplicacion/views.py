@@ -5,7 +5,6 @@ from .forms import *
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 
-
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -20,7 +19,10 @@ def home(request):
 def store(request):
     return render(request,"aplicacion/store.html")
 
-
+def checkout(request):
+    return render(request,"aplicacion/checkout.html")
+#-------------------------------------------------------CRUD-------------------------------------------------------------------------
+#region CRUD
 #-----------------------------------------------CLIENTES------------------------------------------------------------------------
 
 #------------------------------------------------CREATE------------------------------------------------------------------------
@@ -271,7 +273,9 @@ def pedidoDelete(request,id_pedido):
             messages.success(request, f"El pedido '{id_pedido}' ha sido eliminado exitosamente.")
         return redirect('pedidos')
     return render(request, 'aplicacion/pedido_delete.html', {'pedido': pedido})
+#endregion
 #-------------------------------------------------------BUSCAR-------------------------------------------------------------------------
+#region BUSQUEDA
 @login_required
 def buscarClientes(request):
     return render(request,"aplicacion/buscar.html")
@@ -360,9 +364,9 @@ def encontrarPedidos(request):
     
     contexto = {"pedidos": pedidos}
     return render(request, "aplicacion/pedidos.html", contexto)
-
-
+#endregion
 #------------------------------------------LOGIN, LOGOUT, AUTHENTICATION, REGISTRATION-------------------------------------------------------
+#region LOGIN y REGISTRO
 def login_request(request):
     if request.method == "POST":
         usuario = request.POST['username']
@@ -399,8 +403,9 @@ def register(request):
         miForm = CustomUserCreationForm()
     
     return render(request,"aplicacion/registro.html",{"form": miForm})
-
+#endregion
 #------------------------------------------EDICIÓN DE PERFIL, CAMBIO DE CLAVE,AVATAR-------------------------------------
+#region EDICION DE PERFIL Y AVATAR
 @login_required
 def editProfile(request):
     usuario = request.user
@@ -451,7 +456,4 @@ def agregarAvatar(request):
         miForm = AvatarForm()
     
     return render(request,"aplicacion/agregarAvatar.html",{"form": miForm})
-
-#------------------------------------------ABOUT ME-------------------------------------------------------------------
-def aboutMe(request):
-    return render(request,"aplicacion/about_me.html")
+#endregion
