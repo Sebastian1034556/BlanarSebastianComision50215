@@ -36,13 +36,13 @@
                 <td>
                     <a
                     href="{% url 'empleado_update' e.id %}"
-                    class="btn editar_tablas"
+                    class="btn edit-tables"
                     style="--bs-btn-padding-y: .25rem;"
                     ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
                     </a>
                     <a
                     href="{% url 'empleado_delete' e.id %}"
-                    class="btn borrar_tablas"
+                    class="btn delete-tables"
                     style="--bs-btn-padding-y: .25rem;"
                     ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
                     </a>
@@ -63,11 +63,11 @@
 <div id="formulario_empleados" style="display: none;">
     <form action="{% url 'empleado_create' %}" method="post">
         {% csrf_token %}
-        <table class="tabla_formularios">
+        <table class="form-table">
             {{form.as_table}}
         </table>
         <div class="form">
-            <input class="guardar" type="submit" value="Guardar">
+            <input type="submit" value="Guardar">
         </div>
     </form>
 </div>
@@ -76,8 +76,8 @@
 {% block busqueda %}
 <form action="{% url 'encontrar_empleados' %}" method="get">
     {% csrf_token %}
-    <div class="tabla_formularios">
-        <p class="texto_buscar">Ingrese un dato a buscar : <input type="text" name= "buscar" id= "buscar"></p>
+    <div class="form-table">
+        <p class="search-text">Ingrese un dato a buscar : <input type="text" name= "buscar" id= "buscar"></p>
     </div>
     <div class="form">
         <input type="submit" value="buscar">

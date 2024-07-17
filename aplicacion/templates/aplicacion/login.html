@@ -28,7 +28,7 @@
             <div class="button_container">
                 <form action="{% url 'home' %}">
                     {% csrf_token %}
-                    <button type="submit" class="form__btn back">REGRESAR</button>
+                    <button type="submit" class="form__btn back-button">REGRESAR</button>
                 </form>
             </div>
         </div>
@@ -38,17 +38,3 @@
 </div>
 </body>
 </html>
-
-
-
-
-
-
-
-<!-- <form action="" method="post">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <input type="submit" value="Enviar">
-</form> -->

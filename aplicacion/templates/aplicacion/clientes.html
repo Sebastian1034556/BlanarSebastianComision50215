@@ -36,13 +36,13 @@
                 <td>
                 <a
                 href="{% url 'cliente_update' c.id %}"
-                class="btn editar_tablas"
+                class="btn edit-tables"
                 style="--bs-btn-padding-y: .25rem;"
                 ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
                 </a>
                 <a
                 href="{% url 'cliente_delete' c.id %}"
-                class="btn borrar_tablas"
+                class="btn delete-tables"
                 style="--bs-btn-padding-y: .25rem;"
                 ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
                 </a>
@@ -64,11 +64,11 @@
 <div id="formulario_clientes" style="display: none;">
     <form id="cliente-form" action="{% url 'cliente_create' %}" method="post">
         {% csrf_token %}
-        <table class="tabla_formularios">
+        <table class="form-table">
             {{form.as_table}}
         </table>
         <div class="form">
-            <input class="guardar" type="submit" value="Guardar">
+            <input type="submit" value="Guardar">
         </div>
     </form>
     <div id="error-message" style="color: red;"></div>
@@ -79,8 +79,8 @@
 {% block busqueda %}
 <form action="{% url 'encontrar_clientes' %}" method="get">
     {% csrf_token %}
-    <div class="tabla_formularios">
-        <p class="texto_buscar">Ingrese un dato a buscar : <input type="text" name= "buscar" id= "buscar"></p>
+    <div class="form-table">
+        <p class="search-text">Ingrese un dato a buscar : <input type="text" name= "buscar" id= "buscar"></p>
     </div>
     <div class="form">
         <input  type="submit" value="buscar">

@@ -56,26 +56,12 @@
             <div class="button_container">
                 <form action="{% url 'home' %}">
                     {% csrf_token %}
-                    <button type="submit" class="form__btn back">REGRESAR</button>
+                    <button type="submit" class="form__btn back-button">REGRESAR</button>
                 </form>
             </div>
         </div>
         <div class="img_container" id="form__img-container">
-            <img class="form__img" src="{% static 'assets/imagenes/niklas.jpg' %}" alt="">
+            <img class="form__img" src="{% static 'assets/img/login-image.jpg' %}" alt="">
         </div>
 </div>
 </body>
-
-
-
-
-
-
-
-<!-- <form action="" method="post">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <input type="submit" value="Enviar">
-</form> -->
