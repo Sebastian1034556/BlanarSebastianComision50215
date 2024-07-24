@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-# Create your models here.
+
 class Cliente(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
@@ -24,8 +24,6 @@ class Cliente(models.Model):
         dni_str = str(self.dni)
         if not (8 <= len(dni_str) <= 10):
             raise ValidationError({'dni': 'El DNI debe tener entre 8 y 10 dígitos.'})
-
-
     
     def save(self, *args, **kwargs):
         self.full_clean()  # Esto llama a self.clean() y valida el modelo.

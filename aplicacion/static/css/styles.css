@@ -6,6 +6,7 @@
 }
 
 /*-----------------------------------------------------GENERALES-------------------------------------------------------------------------------------*/
+/* #region GENERALES */
 body {
     font-family: sans-serif;
     background-color: #000;
@@ -59,13 +60,12 @@ i,.edit-tables,.delete-tables {
     width: 0;
     --bs-btn-padding-x: 0.5rem;
 }
-
+/* #endregion */
 /*------------------------------HEADER-----------  */
 /* #region HEADER */
 header{
     background-color: transparent;
     flex-wrap: wrap;
-    position: fixed;
     top: 0;
     right: 0;
     width: 100vw;
@@ -340,9 +340,10 @@ td {
     padding: 8px; /* Añadir espacio interno en las celdas */
 }
 
-input {
+form input {
     background-color: aliceblue;
     color: #000000;
+    border: none;
 }
 
 .search-text {
@@ -357,6 +358,16 @@ input {
 .form input {
     margin-top: 20px;
 }
+
+form input:focus {
+    outline: none;
+    border: none;
+}
+
+
+
+
+
 .form-table {
     display: flex;
     justify-items: center;
@@ -370,6 +381,15 @@ input {
 .form-table label {
     color: #000000;
 }
+
+.valid-input {
+    box-shadow: 0 0 0 2px #007bff; /* Sombra azul para indicar validez */
+}
+
+.invalid-input {
+    box-shadow: 0 0 0 2px #dc3545; /* Sombra roja para indicar error */
+}
+
 /* #endregion */
 
 /*----------------------------------------------------- MEDIA QUERIES */

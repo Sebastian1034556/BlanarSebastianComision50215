@@ -29,7 +29,7 @@ function confirmarCompra() {
         if (result.isConfirmed) {
             mostrarMensajeCarrito("", "success", "¡Muchas gracias por su compra!").then(() => {
                 localStorage.removeItem("carrito");
-                location.href = home;
+                location.href = store;
             });
         }
     });

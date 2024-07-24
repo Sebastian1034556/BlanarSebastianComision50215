@@ -47,4 +47,6 @@ urlpatterns = [
     path('perfil/',editProfile, name="perfil"),
     path('<int:pk>/password/',CambiarClave.as_view(), name='cambiar_clave'),        
     path('agregarAvatar/',agregarAvatar, name="agregar_avatar"),
+    #----------------------------------------------------Comunicacion con el cliente
+    path('verificarDni/', verificar_dni, name='verificar_dni'),
 ]  

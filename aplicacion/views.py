@@ -407,6 +407,7 @@ def register(request):
 #------------------------------------------EDICIÓN DE PERFIL, CAMBIO DE CLAVE,AVATAR-------------------------------------
 #region EDICION DE PERFIL Y AVATAR
 @login_required
+
 def editProfile(request):
     usuario = request.user
     if request.method == "POST":
@@ -456,4 +457,28 @@ def agregarAvatar(request):
         miForm = AvatarForm()
     
     return render(request,"aplicacion/agregarAvatar.html",{"form": miForm})
+#endregion
+
+
+#----------------------------------------------------COMUNICACION CON EL CLIENTE--------------------------------------------------
+# region VERIFICAR DNI DUPLICADO
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import Cliente  # Asegúrate de importar tu modelo adecuado
+
+@csrf_exempt
+def verificar_dni(request):
+    if request.method == 'GET':
+        dni = request.GET.get('dni', '').strip()  # Obtén el DNI de los parámetros GET y elimina espacios
+        if dni:
+            # Verifica si el DNI ya existe en la base de datos
+            existe = Cliente.objects.filter(dni=dni).exists()
+            # Devuelve una respuesta JSON con el resultado
+            return JsonResponse({'exists': existe})
+        else:
+            # Devuelve un error si el DNI no se proporciona
+            return JsonResponse({'error': 'DNI no proporcionado'}, status=400)
+    else:
+        # Devuelve un error si el método no es GET
+        return JsonResponse({'error': 'Método no permitido'}, status=405)
 #endregion
