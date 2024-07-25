@@ -203,8 +203,7 @@ header .navigation{
         black 80%,
         transparent);
         
-        opacity: 0.1;
-        transition: opacity 1s ease-out;
+        opacity: 1;
 } 
 
 .carousel-item--no_mask img {
@@ -221,13 +220,6 @@ h5 {
 }
 .active {
     background:linear-gradient(to bottom,#000000,transparent) ;
-}
-.video {
-    max-width: 100%;
-    aspect-ratio: 16/9;
-}
-.video video {
-    max-width: 100%;
 }
 /* #endregion */
 

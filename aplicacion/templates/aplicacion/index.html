@@ -75,13 +75,14 @@
             <section>
                 <div class="carousel slide" id="carouselExample" data-bs-ride="carousel">
                     <div class="carousel-inner">
-
-                        <div class="carousel-item active video" data-bs-interval="13000">
-                            <video autoplay muted controls src="{% static 'assets/videos/howards-4.mp4' %}" class="d-block w-100" alt="Slide 1" >
+                        <div class="carousel-item active" data-bs-interval="8000">
+                            <img src="{% static 'assets/img/slide-1.jpg' %}" class="d-block w-100 carousel__img" alt="Slide 1">
                         </div>
-
-                        <div class="carousel-item" data-bs-interval="7000">
-                            <img src="{% static 'assets/img/adidas_wallpaper.jpg' %}" class="d-block w-100 carousel__img" alt="Slide 2">
+                        <div class="carousel-item">
+                            <img src="{% static 'assets/img/slide-2.jpg' %}" class="d-block w-100 carousel__img" alt="Slide 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'assets/img/slide-3.jpg' %}" class="d-block w-100" alt="Slide 3">
                         </div>
                     <button class="carousel-control-prev" id="ctrlbtn1" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -138,41 +139,6 @@
 
                 </div>
                 </section>
-                <section style="margin-top: 20px;">
-                    <div class="container container_carousel">
-                        <div id="carouselExample2" class="carousel slide">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active img_div">
-                                    <img style="margin-bottom: 10px;" src="{% static 'assets/img/wallpaperflare.com_wallpaper (10).jpg' %}" class="d-block w-100" alt="Slide 1">
-                                    <div class="carousel-caption">
-                                        <h5>MUJERES</h5>
-                                    </div>
-                                </div>
-                                <div class="carousel-item img_div">
-                                    <img style="margin-bottom: 10px;" src="{% static 'assets/img/wallpaperflare.com_wallpaper(5).jpg' %}" class="d-block w-100" alt="Slide 2">
-                                    <div class="carousel-caption">
-                                        <h5>HOMBRES</h5>
-                                    </div>
-                                </div>
-                                <div class="carousel-item img_div">
-                                    <img style="margin-bottom: 10px;" src="{% static 'assets/img/wallpaperflare.com_wallpaper (3).jpg' %}" class="d-block w-100" alt="Slide 3">
-                                    <div class="carousel-caption">
-                                        <h5>DEPORTIVAS</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" id="ctrlbtn3" type="button" data-bs-target="#carouselExample2" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" id="ctrlbtn4" type="button" data-bs-target="#carouselExample2" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-                
         </main>
 
     

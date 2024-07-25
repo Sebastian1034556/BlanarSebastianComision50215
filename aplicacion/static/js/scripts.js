@@ -48,42 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // #endregion
 
-// #region CARRUSEL
-
-    const ctrlBtn1 = document.querySelector("#ctrlbtn1");
-    const imagenCarrusel = document.querySelector(".carousel__img");
-    const ctrlBtn2 = document.querySelector("#ctrlbtn2");
-
-    function mostrarElemento(ctrlBtn, imagenCarrusel) {
-        ctrlBtn.addEventListener("click", () => {
-            imagenCarrusel.style.opacity = "1";
-        });
-    }
-    
-    if (comprobarUrl(homeUrl,true)) {
-        if (ctrlBtn1 && imagenCarrusel) {
-            mostrarElemento(ctrlBtn1, imagenCarrusel);
-        }
-        if (ctrlBtn2 && imagenCarrusel) {
-            mostrarElemento(ctrlBtn2, imagenCarrusel);
-        }
-    }
-// #endregion
-
-    // #region TO DO solucionar video
-
-    // window.addEventListener('load', function() {
-    //     setTimeout(function() {
-    //         document.querySelector(".carousel__img").style.opacity = "1";
-    //     }, 13500); 
-    // });
-
-// #endregion
-
 // #region HEADER
 const header = document.querySelector(".header");
 if (comprobarUrl(homeUrl,true) && header || comprobarUrl(homeUrl + "login/",true) && header) {
     header.style.position = "fixed";
 }
 // #endregion
+
 });
