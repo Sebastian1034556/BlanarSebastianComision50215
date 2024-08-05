@@ -464,15 +464,13 @@ def agregarAvatar(request):
 # region VERIFICAR DNI DUPLICADO
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Cliente  # Asegúrate de importar tu modelo adecuado
 
 @csrf_exempt
 def verificar_dni(request):
     if request.method == 'GET':
         dni = request.GET.get('dni', '').strip()  # Obtén el DNI de los parámetros GET y elimina espacios
         if dni:
-            # Verifica si el DNI ya existe en la base de datos
-            existe = Cliente.objects.filter(dni=dni).exists()
+            existe = Cliente.objects.filter(dni=dni).exists() or Empleado.objects.filter(dni=dni).exists()
             # Devuelve una respuesta JSON con el resultado
             return JsonResponse({'exists': existe})
         else:

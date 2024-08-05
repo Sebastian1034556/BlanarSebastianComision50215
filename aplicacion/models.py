@@ -22,8 +22,8 @@ class Cliente(models.Model):
             raise ValidationError({'edad': 'La edad debe ser de entre 18 y 120 años'})
         
         dni_str = str(self.dni)
-        if not (8 <= len(dni_str) <= 10):
-            raise ValidationError({'dni': 'El DNI debe tener entre 8 y 10 dígitos.'})
+        if not (8 == len(dni_str)):
+            raise ValidationError({'dni': 'El DNI debe tener 8 dígitos.'})
     
     def save(self, *args, **kwargs):
         self.full_clean()  # Esto llama a self.clean() y valida el modelo.
@@ -33,7 +33,7 @@ class Cliente(models.Model):
         return f"{self.nombre},{self.apellido}"
 
 class Producto(models.Model):
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=100)
     precio  = models.FloatField()
     marca = models.CharField(max_length=50)
     stock = models.PositiveIntegerField()
@@ -45,8 +45,8 @@ class Producto(models.Model):
             if len(field_value) < 3:
                 raise ValidationError({field_name: f'El {field_name} debe tener al menos 3 caracteres.'})
 
-        if self.precio <= 0:
-            raise ValidationError({'precio': 'El precio debe ser un valor positivo.'})
+        if self.precio <= 0 and self.precio > 10000000 :
+            raise ValidationError({'precio': 'El precio debe ser un valor positivo menor a 10000000.'})
 
     def save(self, *args, **kwargs):
         self.full_clean()
@@ -75,11 +75,11 @@ class Empleado(models.Model):
             raise ValidationError({'edad': 'La edad debe ser de entre 18 y 120 años'})
         
         dni_str = str(self.dni)
-        if not (8 <= len(dni_str) <= 10):
-            raise ValidationError({'dni': 'El DNI debe tener entre 8 y 10 dígitos.'})
+        if not (8 == len(dni_str)):
+            raise ValidationError({'dni': 'El    debe tener 8 dígitos.'})
         
-        if self.sueldo <= 0:
-            raise ValidationError({'sueldo': 'El sueldo debe ser un valor positivo.'})
+        if self.sueldo <= 0 or self.sueldo > 10000000:
+            raise ValidationError({'sueldo': 'El sueldo debe ser un valor positivo menor a 10000000.'})
 
     def save(self, *args, **kwargs):
         self.full_clean()  # Esto llama a self.clean() y valida el modelo.
