@@ -100,9 +100,10 @@ const sueldoRegex =  /^[0-9]+(\.[0-9]{1,2})?$/;
 const nombreProductoRegex = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑãõçÇ\s\-'.]{3,100}$/
 const precioRegex = /^[0-9]+(\.[0-9]{1,2})?$/;
 const marcaRegex = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑãõçÇ\s\-]{2,50}$/
-const stockRegex =  /^[1-9][0-9]*$/
+const stockRegex =  /^[0-9][0-9]*$/
 const colorRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑãõçÇ\s\-]{3,30}$/
 const tallaRegex = /^\d{1,2}(?:-\d{1,2})?$/
+const imagenRegex = /\.(jpg|jpeg|png|gif|bmp|webp)$/i
 
 //#endregion
 
@@ -119,6 +120,7 @@ const marcaError = 'La marca debe tener entre 2 y 50 caracteres y solo puede con
 const stockError = 'El stock debe ser un número entero positivo.';
 const colorError = 'El color debe tener entre 3 y 30 caracteres y solo puede contener letras, espacios y guiones.';
 const tallaError = 'La talla debe tener entre 1 y 10 caracteres y solo puede contener letras y números.';
+const imagenError = 'El archivo debe ser una imagen con una de las siguientes extensiones: jpg, jpeg, png, gif, bmp, webp.';
 //#endregion
 
 // clientes
@@ -138,9 +140,9 @@ const errorMessagesEmpleados = [nombreError,dniError,apellidoError,edadError,sue
 
 // productos
 const formularioProductos = document.getElementById("producto-form")
-const fieldsProductos = ["nombre","precio","marca","stock","color","talla"]
-const regexProductos = [nombreProductoRegex,precioRegex,marcaRegex,stockRegex,colorRegex,tallaRegex]
-const errorMessagesProductos = [nombreProductoError,precioError,marcaError,stockError,colorError,tallaError]
+const fieldsProductos = ["nombre","precio","marca","stock","color","talla","imagen"]
+const regexProductos = [nombreProductoRegex,precioRegex,marcaRegex,stockRegex,colorRegex,tallaRegex,imagenRegex]
+const errorMessagesProductos = [nombreProductoError,precioError,marcaError,stockError,colorError,tallaError,imagenError]
 
 if (comprobarUrl(clientesUrl)) validarFormulario(clientesUrl,formularioClientes,fieldsClientes,regexClientes,errorMessagesClientes)
 else if (comprobarUrl(empleadosUrl)) validarFormulario(empleadosUrl,formularioEmpleados,fieldsEmpleados,regexEmpleados,errorMessagesEmpleados)

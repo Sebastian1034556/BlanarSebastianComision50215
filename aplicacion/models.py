@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
+#region CRUD
 class Cliente(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
@@ -38,7 +39,9 @@ class Producto(models.Model):
     marca = models.CharField(max_length=50)
     stock = models.PositiveIntegerField()
     color = models.CharField(max_length=50) 
-    talla = models.CharField(max_length=50) 
+    talla = models.CharField(max_length=50)
+    imagen = models.CharField(max_length=200)
+    cantidad = models.IntegerField(default=1)
     
     def clean(self):
         for field_value, field_name in [(self.nombre, 'nombre'), (self.marca, 'marca'), (self.color, 'color')]:
@@ -120,3 +123,21 @@ class Pedido(models.Model):
 
     def __str__(self):
         return self.fecha.strftime('%d/%m/%Y')
+#endregion
+
+class Order(models.Model):
+    ordernum = models.CharField(max_length=9,null=True,blank=True)
+    customer = models.CharField(max_length=200,null=True,blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    status = models.BooleanField(default=True)
+    
+    def __str__(self) -> str:
+        return self.ordernum
+    
+class Order_Detail(models.Model):
+    product = models.ForeignKey(Producto,on_delete=models.CASCADE)
+    cant = models.IntegerField(default=1)
+    order = models.ForeignKey(Order,on_delete=models.CASCADE)
+    
+    def __str__(self) -> str:
+        return self.product.nombre

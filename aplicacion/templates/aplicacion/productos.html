@@ -21,6 +21,7 @@
                 <th>Stock</th>
                 <th>Color</th>
                 <th>Talla</th>
+                <th>Imagen</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -36,6 +37,7 @@
                 <td>{{ p.stock }}</td>
                 <td>{{ p.color }}</td>
                 <td>{{ p.talla }}</td>
+                <td>{{ p.imagen }}</td>
                 <td>
                     <a
                     href="{% url 'producto_update' p.id %}"

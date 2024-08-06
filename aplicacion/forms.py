@@ -24,6 +24,7 @@ class ProductoForm(forms.Form):
     stock = forms.IntegerField(required=True)
     color = forms.CharField(max_length=50,required=True)
     talla = forms.CharField(max_length=50,required=True)
+    imagen = forms.CharField(max_length=200,required=True)
 
 class RegistroForm(UserCreationForm):
     email = forms.EmailField(required=True)

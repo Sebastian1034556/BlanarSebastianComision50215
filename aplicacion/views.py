@@ -1,3 +1,4 @@
+import json,random
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from .models import *
@@ -164,7 +165,9 @@ def productoCreate(request):
             producto_stock =  miForm.cleaned_data.get("stock")
             producto_color = miForm.cleaned_data.get("color")
             producto_talla = miForm.cleaned_data.get("talla")
-            producto = Producto(nombre = producto_nombre, precio = producto_precio, stock = producto_stock,marca = producto_marca,color = producto_color, talla = producto_talla)
+            producto_imagen = miForm.cleaned_data.get("imagen")
+        
+            producto = Producto(nombre = producto_nombre, precio = producto_precio, stock = producto_stock,marca = producto_marca,color = producto_color, talla = producto_talla, imagen = producto_imagen)
             producto.save()
             messages.add_message(request=request,level=messages.SUCCESS,message="Producto agregado con éxito")
             return redirect(reverse_lazy('productos'))
@@ -480,3 +483,28 @@ def verificar_dni(request):
         # Devuelve un error si el método no es GET
         return JsonResponse({'error': 'Método no permitido'}, status=405)
 #endregion
+
+# def paypal_checkout(request):
+#     return render(request,"aplicacion/paypal_checkout.html")
+
+# def payment_complete(request):
+#     body = json.loads(request.body)
+#     sess = request.session.get("data",{"items":[]})
+#     productos_carro = sess["items"]
+#     Oc = Order()
+#     Oc.customer = body['customer']
+#     Oc.ordernum = random.randint(10000,99999)
+#     Oc.save()
+#     for item in productos_carro:
+#         prod = Producto.objects.get(slug=item)
+#         Od = Order_Detail
+#         Od.product = prod
+#         Od.cant = 1
+#         Od.order = Oc
+#         Od.save()
+#     del request.session['data']
+#     return redirect('success')
+
+# def success(request):
+#     template_name = "aplicacion/success.html"
+#     return render(request,template_name)

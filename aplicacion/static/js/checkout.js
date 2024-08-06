@@ -3,8 +3,7 @@ const contenedor = document.getElementById("productCardContainer")
 const importeTotalCarrito = document.querySelector("p#importeTotalCarrito")
 const btnComprar = document.querySelector("button#btnComprar")
 const btnVolver = document.querySelector("button.back")
-const home = "/"
-const store = "/store"
+const store = "/"
 
 // #region MENSAJES
 //Se retorna una promesa
@@ -83,6 +82,7 @@ function agregarProductoCarrito(carrito,botonesAgregar) {
             let productoClickeado = e.target
             let prod = buscarIdProducto(carrito,productoClickeado)
             prod.cantidad += 1
+            localStorage.setItem("carrito",JSON.stringify(carrito))
             cargarProductosDelCarrito()
         }) 
     })
@@ -93,6 +93,7 @@ function eliminarProductoCarrito(carrito,botonesEliminar){
             let productoClickeado = e.target
             let prod = buscarIdProducto(carrito,productoClickeado)
             prod.cantidad != 1 ? prod.cantidad -= 1 : eliminarElemento(carrito,prod.id)
+            localStorage.setItem("carrito",JSON.stringify(carrito))
             cargarProductosDelCarrito()
         }) 
     })
@@ -120,7 +121,7 @@ function cargarProductosDelCarrito() {
             calcularTotalCarrito(carrito)
         } else {
             calcularTotalCarrito(carrito)
-            location.href = home
+            location.href = store
         }
     } catch(e){
         console.error(e)
@@ -143,4 +144,9 @@ btnVolver.addEventListener("click",()=>{
     }).then((result) => {
         if (result.isConfirmed) location.href = store
     })
+})
+
+const header = document.querySelector("img.logo")
+header.addEventListener("click" , ()=>{
+    location.href = store
 })
