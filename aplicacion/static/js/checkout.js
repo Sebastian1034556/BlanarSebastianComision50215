@@ -132,7 +132,13 @@ function cargarProductosDelCarrito() {
 cargarProductosDelCarrito() 
 // #endregion CARRITO
 
-btnComprar.addEventListener("click", confirmarCompra);
+// btnComprar.addEventListener("click", confirmarCompra);
+
+btnComprar.addEventListener("click", ()=>{
+    const paypalContainer = document.querySelector(".paypal-container")
+    paypalContainer.style.opacity = "1"
+    paypalContainer.style.pointerEvents = "all"
+});
 
 btnVolver.addEventListener("click",()=>{
     Swal.fire({

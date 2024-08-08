@@ -100,44 +100,43 @@ class Avatar(models.Model):
 
 class Pedido(models.Model):
     fecha = models.DateField(auto_now_add=True)
-    cliente = models.IntegerField()
-    productos = models.CharField(max_length=50) 
-    cantidad = models.IntegerField()  
-    ubicacion = models.CharField(max_length=50) 
-    estado = models.CharField(max_length=50)  
+    cliente = models.CharField(max_length=50)
+    direccion = models.CharField(max_length=100) 
+    total = models.DecimalField(max_digits=10, decimal_places=2,default=0)
+    estado = models.CharField(max_length=50)
     
     def clean(self):
-        for field_value, field_name in [(self.productos, 'productos'), (self.estado, 'estado')]:
+        for field_value, field_name in [(self.estado, 'estado')]:
             if len(field_value) < 3:
                 raise ValidationError({field_name: f'El {field_name} debe tener al menos 3 caracteres.'})
         
-        if self.cliente <= 1000:
-            raise ValidationError({'cliente': 'El id del cliente debe ser mayor que 1000.'})
-        
-        if self.cantidad <= 0:
-            raise ValidationError({'cantidad': 'El cantidad debe ser un valor positivo.'})
-
     def save(self, *args, **kwargs):
-        self.full_clean()  # Esto llama a self.clean() y valida el modelo.
+        self.full_clean() 
         super(Pedido, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.fecha.strftime('%d/%m/%Y')
 #endregion
 
-class Order(models.Model):
-    ordernum = models.CharField(max_length=9,null=True,blank=True)
-    customer = models.CharField(max_length=200,null=True,blank=True)
-    created = models.DateTimeField(auto_now_add=True)
-    status = models.BooleanField(default=True)
+class PedidoDetalle(models.Model):
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.IntegerField(default=1)
+
+    def clean(self):
+        if self.cantidad <= 0:
+            raise ValidationError({'cantidad': 'La cantidad debe ser un valor positivo.'})
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super(PedidoDetalle, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f'{self.producto.nombre} x {self.cantidad}'
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    address = models.CharField(max_length=255, blank=True, null=True)
     
-    def __str__(self) -> str:
-        return self.ordernum
-    
-class Order_Detail(models.Model):
-    product = models.ForeignKey(Producto,on_delete=models.CASCADE)
-    cant = models.IntegerField(default=1)
-    order = models.ForeignKey(Order,on_delete=models.CASCADE)
-    
-    def __str__(self) -> str:
-        return self.product.nombre
+    def __str__(self):
+        return self.user.username

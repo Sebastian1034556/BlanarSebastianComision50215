@@ -117,3 +117,12 @@ header {
     margin-top: 20px; 
     color: white;
 }
+.paypal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    opacity: 0;
+    transition: opacity 1s;
+    pointer-events: none;
+}

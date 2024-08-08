@@ -20,8 +20,19 @@ def home(request):
 def store(request):
     return render(request,"aplicacion/store.html")
 
+
 def checkout(request):
-    return render(request,"aplicacion/checkout.html")
+    user_profile = None
+    if request.user.is_authenticated:
+        try:
+            user_profile = UserProfile.objects.get(user=request.user)
+        except UserProfile.DoesNotExist:
+            user_profile = None
+    
+    context = {
+        'user_profile': user_profile
+    }
+    return render(request, "aplicacion/checkout.html", context)
 #-------------------------------------------------------CRUD-------------------------------------------------------------------------
 #region CRUD
 #-----------------------------------------------CLIENTES------------------------------------------------------------------------
@@ -226,11 +237,10 @@ def pedidoCreate(request):
         if miForm.is_valid():
             pedido_fecha = miForm.cleaned_data.get("fecha")
             pedido_cliente = miForm.cleaned_data.get("cliente")
-            pedido_productos =  miForm.cleaned_data.get("productos")
-            pedido_cantidad = miForm.cleaned_data.get("cantidad")
-            pedido_ubicacion = miForm.cleaned_data.get("ubicacion")
+            pedido_direccion = miForm.cleaned_data.get("direccion")
+            pedido_total = miForm.cleaned_data.get("total")
             pedido_estado = miForm.cleaned_data.get("estado")
-            pedido = Pedido(fecha = pedido_fecha, cliente = pedido_cliente, productos = pedido_productos,cantidad = pedido_cantidad, ubicacion = pedido_ubicacion, estado = pedido_estado)
+            pedido = Pedido(fecha = pedido_fecha, cliente = pedido_cliente, direccion = pedido_direccion,total = pedido_total, estado = pedido_estado)
             pedido.save()
             messages.add_message(request=request,level=messages.SUCCESS,message="Pedido agregado con éxito")
             return redirect(reverse_lazy('pedidos'))
@@ -255,16 +265,15 @@ def pedidoUpdate(request,id_pedido):
         if miForm.is_valid():
             pedido.fecha = miForm.cleaned_data.get("fecha")
             pedido.cliente = miForm.cleaned_data.get("cliente")
-            pedido.productos =  miForm.cleaned_data.get("productos")
-            pedido.cantidad = miForm.cleaned_data.get("cantidad")
-            pedido.ubicacion = miForm.cleaned_data.get("ubicacion")
+            pedido.direccion = miForm.cleaned_data.get("direccion")
+            pedido_total = miForm.cleaned_data.get("total")
             pedido.estado = miForm.cleaned_data.get("estado")
             
             pedido.save()
             
             return redirect(reverse_lazy('pedidos'))
     else:
-        miForm = PedidoForm(initial={'fecha': pedido.fecha, 'cliente' : pedido.cliente, 'productos' : pedido.productos ,'cantidad' : pedido.cantidad, 'ubicacion' : pedido.ubicacion , 'estado': pedido.estado} )
+        miForm = PedidoForm(initial={'fecha': pedido.fecha, 'cliente' : pedido.cliente, 'direccion' : pedido.direccion ,'total' : pedido_total,'estado': pedido.estado} )
     return render(request,"aplicacion/pedidoForm.html",{"form": miForm})
 #----------------------------------------------------------DELETE----------------------------------------------------------------------
 @login_required
@@ -396,16 +405,16 @@ def login_request(request):
 
 def register(request):
     if request.method == "POST":
-        miForm = CustomUserCreationForm(request.POST)
-        
-        if miForm.is_valid():
-            usuario = miForm.cleaned_data.get("username")
-            miForm.save()
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            UserProfile.objects.create(user=user, address=form.cleaned_data['address'])
             return redirect(reverse_lazy('home'))
     else:
-        miForm = CustomUserCreationForm()
+        form = CustomUserCreationForm()
     
-    return render(request,"aplicacion/registro.html",{"form": miForm})
+    return render(request, "aplicacion/registro.html", {"form": form})
+
 #endregion
 #------------------------------------------EDICIÓN DE PERFIL, CAMBIO DE CLAVE,AVATAR-------------------------------------
 #region EDICION DE PERFIL Y AVATAR
@@ -484,27 +493,13 @@ def verificar_dni(request):
         return JsonResponse({'error': 'Método no permitido'}, status=405)
 #endregion
 
-# def paypal_checkout(request):
-#     return render(request,"aplicacion/paypal_checkout.html")
-
-# def payment_complete(request):
-#     body = json.loads(request.body)
-#     sess = request.session.get("data",{"items":[]})
-#     productos_carro = sess["items"]
-#     Oc = Order()
-#     Oc.customer = body['customer']
-#     Oc.ordernum = random.randint(10000,99999)
-#     Oc.save()
-#     for item in productos_carro:
-#         prod = Producto.objects.get(slug=item)
-#         Od = Order_Detail
-#         Od.product = prod
-#         Od.cant = 1
-#         Od.order = Oc
-#         Od.save()
-#     del request.session['data']
-#     return redirect('success')
-
-# def success(request):
-#     template_name = "aplicacion/success.html"
-#     return render(request,template_name)
+#region OBTENER DIRECCION USUARIO
+@login_required
+def obtener_direccion(request):
+    try:
+        perfil = User.objects.get(user=request.user)
+        direccion = perfil.direccion
+        return JsonResponse({'direccion': direccion}, status=200)
+    except User.DoesNotExist:
+        return JsonResponse({'error': 'Usuario no encontrado'}, status=404)
+#endregion

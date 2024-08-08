@@ -2,11 +2,12 @@ from django.urls import path, include
 from .views import *
 from django.contrib.auth.views import LogoutView
 from rest_framework import routers
-from .api import ProductoViewSet
+from .api import ProductoViewSet,PedidoViewSet
 
 
 router = routers.DefaultRouter()
 router.register('products',ProductoViewSet, 'product')
+router.register('orders',PedidoViewSet, 'order')
 
 
 urlpatterns = [
@@ -56,8 +57,6 @@ urlpatterns = [
     path('agregarAvatar/',agregarAvatar, name="agregar_avatar"),
     #----------------------------------------------------Comunicacion con el cliente
     path('verificarDni/', verificar_dni, name='verificar_dni'),
-    # path('paypal_checkout/',paypal_checkout,name="paypal_checkout"),
-    # path('success/',success,name="success"),
-    # path('payment_complete/',payment_complete,name="payment_complete"),
+    path('obtener_direccion/', obtener_direccion, name='obtener_direccion'),
     path('api/', include(router.urls)),
 ]  

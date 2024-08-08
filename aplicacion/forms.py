@@ -30,19 +30,21 @@ class RegistroForm(UserCreationForm):
     email = forms.EmailField(required=True)
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Confirma tu contraseña", widget=forms.PasswordInput)
+    address = forms.CharField(required=True,max_length=100)
     
     class Meta:
         model = User
-        fields = ["username", "email", "password1", "password2"]
+        fields = ["username", "email", "password1", "password2","address"]
         
 class UserEditForm(UserChangeForm):
     email = forms.EmailField(required=True)
     first_name = forms.CharField(label="Nombre/s", max_length=50,required=True)
     last_name = forms.CharField(label="Apellido/s", max_length=50,required=True)
+    address = forms.CharField(required=True,max_length=100)
     
     class Meta:
         model = User
-        fields = ["email", "first_name", "last_name"]
+        fields = ["email", "first_name", "last_name","address"]
 
 
 class AvatarForm(forms.Form):
@@ -51,14 +53,13 @@ class AvatarForm(forms.Form):
 
 class PedidoForm(forms.Form):
     fecha = forms.DateTimeField(required=True)
-    cliente = forms.IntegerField(required=True)
-    productos = forms.CharField(max_length=255,required=True) 
-    cantidad = forms.IntegerField(required=True)  
-    ubicacion = forms.CharField(max_length=100,required=True) 
+    cliente =forms.CharField(max_length=50,required=True)  
+    direccion = forms.CharField(max_length=100,required=True) 
+    total = forms.DecimalField(max_digits=10, decimal_places=2,required=True) 
     estado = forms.CharField(max_length=50,required=True)
     
     class Meta:
-        fields = ['cliente', 'productos', 'cantidad', 'ubicacion', 'estado']
+        fields = ['cliente', 'productos', 'cantidad', 'direccion','total', 'estado']
         widgets = {
             'fecha': forms.DateTimeInput(attrs={'readonly': 'readonly'}),  
             }
@@ -72,6 +73,8 @@ class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Confirma tu contraseña", widget=forms.PasswordInput)
+    address = forms.CharField(label="Dirección",required=True,max_length=100)
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].label = "Usuario"

@@ -22,11 +22,19 @@ async function onSubmit(event,fields,regex,update) {
     const form = event.target;
     const elements = []
     let dni = undefined
+    let password1 = undefined
+    let password2 = undefined
 
     for (let i = 0; i < fields.length; i++){
         elements.push(document.getElementById('id_' + fields[i]))
         if (fields[i] === "dni"){
             dni = document.getElementById('id_' + fields[i]).value
+        }
+        else if (fields[i] === "password1"){
+            password1 = document.getElementById('id_' + fields[i]).value
+        }
+        else if (fields[i] === "password2"){
+            password2 = document.getElementById('id_' + fields[i]).value
         } 
     }
     const alertMessage = document.getElementById('error-message');
@@ -39,12 +47,12 @@ async function onSubmit(event,fields,regex,update) {
             alertMessage.innerText = "Por favor, corrija los campos en rojo antes de enviar el formulario."
         }
     }
+    // casos excepcionales
     if (validFields && dni){
         if (update == false){
             event.preventDefault();
             try {
                 const esDniUnico = await verificarDni(dni);
-                alert(esDniUnico)
                 if (!esDniUnico) {  
                     alertMessage.innerText = 'El DNI ya está registrado. Por favor, revíselo.';
                 } else {
@@ -56,7 +64,13 @@ async function onSubmit(event,fields,regex,update) {
         } else {
             form.submit();
         }
-        
+    } 
+    else if (validFields && password1 && password2){
+        if (password1 === password2){
+            form.submit()
+        } else {
+            alertMessage.innerText = 'Las contraseñas no coinciden.';
+        }
     }
 }
 
@@ -104,6 +118,9 @@ const stockRegex =  /^[0-9][0-9]*$/
 const colorRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑãõçÇ\s\-]{3,30}$/
 const tallaRegex = /^\d{1,2}(?:-\d{1,2})?$/
 const imagenRegex = /\.(jpg|jpeg|png|gif|bmp|webp)$/i
+const contraseñaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^#\(\)\-_\+\=\{\}\[\]\|\\:;'",<>\.\/])[A-Za-z\d@$!%*?&^#\(\)\-_\+\=\{\}\[\]\|\\:;'",<>\.\/]{8,}$/;
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const direccionRegex = /^[a-zA-Z0-9\s,.'#-]{3,100}$/;
 
 //#endregion
 
@@ -121,6 +138,11 @@ const stockError = 'El stock debe ser un número entero positivo.';
 const colorError = 'El color debe tener entre 3 y 30 caracteres y solo puede contener letras, espacios y guiones.';
 const tallaError = 'La talla debe tener entre 1 y 10 caracteres y solo puede contener letras y números.';
 const imagenError = 'El archivo debe ser una imagen con una de las siguientes extensiones: jpg, jpeg, png, gif, bmp, webp.';
+
+const contraseñaError = 'La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula, un número y un carácter especial (por ejemplo, @, $, !, %, *, ?, &).';
+const emailError = 'El email debe ser una dirección válida, por ejemplo, usuario@dominio.com.';
+const direccionError = 'La dirección debe tener entre 3 y 100 caracteres y puede incluir letras, números, espacios, comas, puntos, apóstrofes, guiones o el símbolo de número (#).';
+
 //#endregion
 
 // clientes
@@ -144,6 +166,12 @@ const fieldsProductos = ["nombre","precio","marca","stock","color","talla","imag
 const regexProductos = [nombreProductoRegex,precioRegex,marcaRegex,stockRegex,colorRegex,tallaRegex,imagenRegex]
 const errorMessagesProductos = [nombreProductoError,precioError,marcaError,stockError,colorError,tallaError,imagenError]
 
+// registro
+const fieldsRegistro = ["username","password1","password2","email","address"]
+const regexRegistro = [nombreRegex,contraseñaRegex,contraseñaRegex,emailRegex,direccionRegex]
+const errorMessagesRegistro = [nombreError,contraseñaError,contraseñaError,emailError,direccionError]
+
+
 if (comprobarUrl(clientesUrl)) validarFormulario(clientesUrl,formularioClientes,fieldsClientes,regexClientes,errorMessagesClientes)
 else if (comprobarUrl(empleadosUrl)) validarFormulario(empleadosUrl,formularioEmpleados,fieldsEmpleados,regexEmpleados,errorMessagesEmpleados)
 else if (comprobarUrl(productosUrl)) validarFormulario(productosUrl,formularioProductos,fieldsProductos,regexProductos,errorMessagesProductos)
@@ -159,4 +187,8 @@ else if (comprobarUrl("/empleadoUpdate/")){
 else if (comprobarUrl("/productoUpdate/")){
     const updateProductos = document.getElementById('productoForm')
     validarFormulario('/productoUpdate/',updateProductos,fieldsProductos,regexProductos,errorMessagesProductos,true)
+}
+else if (comprobarUrl("/registrar/")) {
+    const registroForm = document.getElementById("register-form")
+    validarFormulario("/registrar/",registroForm,fieldsRegistro,regexRegistro,errorMessagesRegistro,true)
 }

@@ -37,7 +37,129 @@
             <button id="btnComprar">COMPRAR</button>
             <button class="back" >VOLVER</button>
         </div>
+        <div class="paypal-container">
+            <div id="paypal-button-container"></div>
+            <p id="result-message"></p>
+        </div>
     </main>
+    <script src="https://www.paypal.com/sdk/js?client-id=AfU9olny8yYhPbhiozoQCVhkRZ4NJUohC4d1tgBPUgAA7nwG3-v9paD0-uzTe8Td6P1Ww4pgvIJf-BKM"></script>
+    <script>
+        function getCookie(name){
+            let cookieValue = null
+            if (document.cookie && document.cookie !== ''){
+                let cookies = document.cookie.split(";")
+                for (let i = 0; i < cookies.length; i++){
+                    let cookie = cookies[i].trim()
+                    if (cookie.substring(0,name.length + 1) === (name + "=")){
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+                        break
+                    }
+                }
+            }
+            return cookieValue
+        }
+        let csrftoken = getCookie('csrftoken')
+        const cart = JSON.parse(localStorage.getItem("carrito")) || []
+        const total = cart.reduce((acc, prod)=> acc + (prod.precio * prod.cantidad) , 0) 
+
+        paypal.Buttons({
+            createOrder: function(data,actions){
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: total
+                        }
+                    }]
+                })
+            },
+        onApprove: function(data,actions) {
+            return actions.order.capture().then(function(details) {
+                alert('Transaction completed by ' + details.payer.name.given_name)
+                const direccion = '{{ user_profile.address }}'
+                const order = {
+                    cliente: details.payer.name.given_name,
+                    direccion: direccion, 
+                    estado: 'pendiente',
+                    total: total
+                };
+                
+                fetch('http://127.0.0.1:8000/api/orders/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken
+                    },
+                    body: JSON.stringify(order)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    // Maneja la respuesta de tu API
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    // Maneja el error
+                });
+            })
+        }
+        }).render('#paypal-button-container')
+    </script>
 </body>
 </html>
 
+
+{% comment %}
+
+    const order = { cliente : details.payer.name , amount : total }
+    const orderDetails = { products : cart }
+fetch('/http://127.0.0.1:8000/api/orders/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+    },
+    body: JSON.stringify({ order, orderDetails })
+})
+.then(response => response.json())
+.then(data => {
+    console.log('Success:', data);
+    // Aquí puedes manejar la respuesta de tu API
+})
+.catch((error) => {
+    console.error('Error:', error);
+    // Aquí puedes manejar el error
+}); {% endcomment %}
+
+
+
+
+{% comment %} const order = {
+    cliente: {
+        nombre: details.payer.name.given_name
+    },
+    productos: cart.map(item => ({
+        id: item.id,
+        cantidad: item.cantidad
+    })),
+    direccion: 'Dirección de prueba',  // Obtener esta dirección de un formulario
+    estado: 'pendiente',
+    total: total
+};
+
+fetch('http://127.0.0.1:8000/api/orders/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+    },
+    body: JSON.stringify(order)
+})
+.then(response => response.json())
+.then(data => {
+    console.log('Success:', data);
+    // Maneja la respuesta de tu API
+})
+.catch((error) => {
+    console.error('Error:', error);
+    // Maneja el error
+}); {% endcomment %}

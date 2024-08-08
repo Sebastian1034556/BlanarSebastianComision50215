@@ -14,6 +14,5 @@ admin.site.register(Cliente,ClienteAdmin)
 admin.site.register(Producto)
 admin.site.register(Empleado)
 admin.site.register(Pedido)
-admin.site.register(Order)
-admin.site.register(Order_Detail)
-
+admin.site.register(PedidoDetalle)
+admin.site.register(UserProfile)

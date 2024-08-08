@@ -32,12 +32,14 @@
                     <h1 class="">
                         <img class="logo" src="{% static 'assets/img/logo_footgear.png' %}" alt="">
                     </h1>
+                    <a href="{% url 'store' %}">STORE</a>
                     {% if user.is_authenticated %}
+                        {% if user.is_staff %}
                         <a href="{% url 'clientes' %}">CLIENTES</a>
                         <a href="{% url 'empleados' %}">EMPLEADOS</a>
                         <a href="{% url 'productos' %}">PRODUCTOS</a>
                         <a href="{% url 'pedidos' %}">PEDIDOS</a>
-
+                        {% endif %}
                         <div>
                             <p  class="username">[{{user.username}}]</p>
                             <a href="{% url 'agregar_avatar' %}"><img class="avatar" src="{{request.session.avatar}}" height="40px" weight="40px"></a>
@@ -54,7 +56,6 @@
                             </form>
 
                     {% else %}
-                    <a href="store">STORE</a>
                         <form action="{% url 'login' %}" method="post">
                             {% csrf_token %}
                             <input type="text" name="username" style="display: none;">

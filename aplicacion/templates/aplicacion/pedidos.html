@@ -17,9 +17,8 @@
                 <th>Id</th>
                 <th>Fecha</th>
                 <th>Cliente</th>
-                <th>Productos</th>
-                <th>Cantidad</th>
-                <th>Ubicación</th>
+                <th>Dirección</th>
+                <th>total</th>
                 <th>Estado</th>
                 <th>Acciones</th>
             </tr>
@@ -31,9 +30,8 @@
                 <td>{{ p.id }}</td>
                 <td>{{ p.fecha  | date:"d/m/Y" }}</td>
                 <td>{{ p.cliente }}</td>
-                <td>{{ p.productos }}</td>
-                <td>{{ p.cantidad }}</td>
-                <td>{{ p.ubicacion}}</td>
+                <td>{{ p.direccion}}</td>
+                <td>{{ p.total}}</td>
                 <td>{{ p.estado}}</td>
                 <td>
                     <a
